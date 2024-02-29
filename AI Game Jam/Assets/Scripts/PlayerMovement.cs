@@ -4,63 +4,30 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private float playerSpeed = 5f;
-    private Vector3 playerPos;
-    private bool colliding = false;
-    // Start is called before the first frame update
-    void Start()
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    private float playerSpeed = 2.0f;
+    private void Start()
     {
-        playerPos = playerPrefab.transform.position;
+        controller = gameObject.AddComponent<CharacterController>();
     }
 
-//  Update is called once per frame
     void Update()
     {
-        if(!colliding)
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
         {
-           
-            if (Input.GetKey(KeyCode.D))
-            {
-                Debug.Log("D key was pressed");
-                playerPos.x -= playerSpeed;
-                playerPrefab.transform.position = playerPos;
-            }
-            else if(Input.GetKey(KeyCode.A))
-            {
-                Debug.Log("A key was pressed");
-                playerPos.x += playerSpeed;
-                playerPrefab.transform.position = playerPos;
-            }
-            else if(Input.GetKey(KeyCode.W))
-            {
-                Debug.Log("W key was pressed");
-                playerPos.z -= playerSpeed;
-                playerPrefab.transform.position = playerPos;
-            }
-            else if(Input.GetKey(KeyCode.S))
-            {
-                Debug.Log("S key was pressed");
-                playerPos.z += playerSpeed;
-                playerPrefab.transform.position = playerPos;
-            }
+            playerVelocity.y = 0f; //Ensures that the player doesnt move when it is touching the ground
         }
-    }
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); //Sets move to the input of each axis (WASD or arrow keys)
+        controller.Move(-move * Time.deltaTime * playerSpeed); //moves the player based on the input of the player, move is multiplied by -1 to make the player move in the correct direction
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
 
-     private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Wall")
-        {
-            colliding = true;
-            print("Colliding with wall");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "Wall")
-        {
-            colliding = false;
-        }
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
+
