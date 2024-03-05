@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = new Vector3(0,2.5f,-7f); //The Camera will be 2.5 units above the player (Y) and 7 units behind the player (Z)
+        offset = new Vector3(0,7f,-20f); //The Camera will be 2.5 units above the player (Y) and 7 units behind the player (Z)
     }
 
     // Update is called once per frame
