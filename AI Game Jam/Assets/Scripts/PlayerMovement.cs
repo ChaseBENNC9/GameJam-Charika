@@ -1,3 +1,9 @@
+/*
+* Description: Manages the Player Movement, uses the built in character controller component in unity
+* Author: Chase Bennett-Hill
+* Last Modified: 7 / 03 / 24
+* Last Modified By: Chase Bennett-Hill
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
