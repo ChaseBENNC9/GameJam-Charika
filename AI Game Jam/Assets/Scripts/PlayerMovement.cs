@@ -10,12 +10,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     private CharacterController controller; //Character controller component
     private Vector3 playerVelocity; //Player velocity value based on x y and z axis
     [SerializeField] private bool groundedPlayer; //Checks if the player is touching the ground
     [SerializeField] private float playerSpeed = 4.0f; //Player speed
     [SerializeField] private float jumpHeight = 1.0f; //Jump height
-    private float gravityValue = -9.81f; //Gravity value
+    private const float GRAVITYVALUE = -9.81f;
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>(); //Gets the character controller component
@@ -37,27 +39,14 @@ public class PlayerMovement : MonoBehaviour
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && groundedPlayer) //If the player presses the jump button and is touching the ground
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); //Jumping logic
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITYVALUE);
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime; //Gravity logic
-        controller.Move(playerVelocity * Time.deltaTime); //Moves the player based on the gravity and jump logic
+        playerVelocity.y += GRAVITYVALUE * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     
 
-    //  private void OnControllerColliderHit(ControllerColliderHit hit) //IGNORE FOR NOW: Pushing Physics logic but may not be used in the future left in just in case
-    // {
-
-    //     if (hit.transform.CompareTag("Movable_Object")) 
-    //     {
-    //         Rigidbody body = hit.collider.attachedRigidbody;
-    //         if (body == null || body.isKinematic) return;
-    //         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-    //         body.velocity = pushDir * 1;
-    //         print("xjjd");
-    //     }
-
-    // }
 }
 
