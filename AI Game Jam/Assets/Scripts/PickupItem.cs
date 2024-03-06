@@ -6,7 +6,7 @@ public class PickupItem : MonoBehaviour
 {
     public bool inRange;
     public GameObject item;
-
+    public bool isPickedUp;
 
     // Update is called once per frame
     void Update()
@@ -36,11 +36,15 @@ public class PickupItem : MonoBehaviour
     private void PickUp()
     {
         if (inRange && Input.GetKeyDown(KeyCode.Mouse0)) //if in range and clicks mouse button
-            {
-                Debug.Log("Clicked");
-                gameObject.transform.position = item.transform.position; //stick to players position
-                //other.transform.position = player.transform.position; //stick to players position
-                item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + 0.5f, item.transform.position.z); //raise it so it looks like it is off the ground
-            }
+        {
+            Debug.Log("Clicked");
+            item.transform.position = new Vector3(item.transform.position.x + 1, item.transform.position.y + 0.5f, item.transform.position.z); //raise it so it looks like it is off the ground
+            isPickedUp = !isPickedUp; //set isPickedUp to true
+        }
+        if (isPickedUp)
+        {
+            item.transform.parent = gameObject.transform; //stick to players position
+
+        }
     }
 }
