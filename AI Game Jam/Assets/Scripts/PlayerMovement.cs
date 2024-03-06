@@ -40,9 +40,11 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue); //Jumping logic
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime; //G ravity logic
+        playerVelocity.y += gravityValue * Time.deltaTime; //Gravity logic
         controller.Move(playerVelocity * Time.deltaTime); //Moves the player based on the gravity and jump logic
     }
+
+    
 
     //  private void OnControllerColliderHit(ControllerColliderHit hit) //IGNORE FOR NOW: Pushing Physics logic but may not be used in the future left in just in case
     // {
