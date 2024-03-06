@@ -38,18 +38,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-     private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
 
-        if (hit.transform.CompareTag("Movable_Object")) 
-        {
-            Rigidbody body = hit.collider.attachedRigidbody;
-            if (body == null || body.isKinematic) return;
-            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-            body.velocity = pushDir * 1;
-            print("xjjd");
-        }
-
-    }
 }
 
