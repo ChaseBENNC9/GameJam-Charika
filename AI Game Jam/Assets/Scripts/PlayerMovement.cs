@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             gameObject.transform.forward = move; //Changes the direction the player is facing based on the input of the player
         }
         // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer) //If the player presses the jump button and is touching the ground
+        if (Input.GetButton("Jump") && groundedPlayer) //If the player presses the jump button and is touching the ground
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITYVALUE);
         }
