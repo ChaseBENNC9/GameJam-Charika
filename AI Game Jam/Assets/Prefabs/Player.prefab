@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedPlayer: 0
   playerSpeed: 4
-  jumpHeight: 1
+  jumpHeight: 1.5
 --- !u!143 &7603072239016614082
 CharacterController:
   m_ObjectHideFlags: 0

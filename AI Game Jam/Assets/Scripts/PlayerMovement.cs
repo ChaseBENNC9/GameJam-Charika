@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool groundedPlayer; //Checks if the player is touching the ground
     [SerializeField] private float playerSpeed = 4.0f; //Player speed
     [SerializeField] private float jumpHeight = 1.0f; //Jump height
-    private const float GRAVITYVALUE = -9.81f;
+    private const float GRAVITYVALUE = -24f;
 
     private void Start()
     {
