@@ -176,10 +176,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7333870619983728289}
   - component: {fileID: 8281079456272911379}
-  - component: {fileID: 7603072239016614082}
+  - component: {fileID: 1497361562573633429}
+  - component: {fileID: 1426266362543579902}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +217,21 @@ MonoBehaviour:
   groundedPlayer: 0
   playerSpeed: 4
   jumpHeight: 1.5
---- !u!143 &7603072239016614082
+--- !u!114 &1497361562573633429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4446303500982310001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c82b4efed1c084f85668067ef4f54c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inRange: 0
+  item: {fileID: 0}
+--- !u!143 &1426266362543579902
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,5 +255,5 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
