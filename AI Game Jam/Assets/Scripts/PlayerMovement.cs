@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+
         controller = gameObject.GetComponent<CharacterController>(); //Gets the character controller component
+
     }
 
     void Update()
