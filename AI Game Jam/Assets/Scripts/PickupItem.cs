@@ -32,6 +32,14 @@ public class PickupItem : MonoBehaviour
         {
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
+            if(item.gameObject != null && item.gameObject.name == itemGoal.GetComponent<ItemGoal>().itemName ) //if the item name is the same as the goal name
+            {
+                itemGoal.GetComponent<ItemGoal>().ShowHint(true,"Click mouse to unlock!"); //show the hint for the goal with the item name
+            }
+            else
+            {
+                itemGoal.GetComponent<ItemGoal>().ShowHint(true,"Key required to unlock!"); //show the hint for the goal
+            }
         }
     }
 
@@ -40,6 +48,11 @@ public class PickupItem : MonoBehaviour
         if(collider.gameObject.tag == "Item")
         {
             inRange = false;
+        }
+        else if(collider.gameObject.tag == "ItemGoal")
+        {
+            inRangeGoal = false;
+            itemGoal.GetComponent<ItemGoal>().ShowHint(false,"");
         }
     }
 
