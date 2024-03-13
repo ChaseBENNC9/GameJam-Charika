@@ -1,3 +1,10 @@
+/*
+* Description: This script is used to pick up items it also checks for when the player is in range of the item and the goal
+* Author: Erika Stuart
+* Last Modified: 13 / 03 / 24
+* Last Modified By: Chase Bennett-Hill
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,13 +39,14 @@ public class PickupItem : MonoBehaviour
         {
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
-            if(item.gameObject != null && item.gameObject.name == itemGoal.GetComponent<ItemGoal>().itemName ) //if the item name is the same as the goal name
+            ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
+            if(item.gameObject != null && item.gameObject.name == currentGoal.itemName ) //if the item name is the same as the goal name
             {
-                itemGoal.GetComponent<ItemGoal>().ShowHint(true,"Click mouse to unlock!"); //show the hint for the goal with the item name
+                currentGoal.ShowHint(true,currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
             }
             else
             {
-                itemGoal.GetComponent<ItemGoal>().ShowHint(true,"Key required to unlock!"); //show the hint for the goal
+                itemGoal.GetComponent<ItemGoal>().ShowHint(true,currentGoal.hintNoItem); //show the hint for the goal when the player does not have the item
             }
         }
     }
