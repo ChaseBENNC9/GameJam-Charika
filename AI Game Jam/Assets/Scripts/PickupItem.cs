@@ -72,16 +72,18 @@ public class PickupItem : MonoBehaviour
         //happens only once/when key press
         if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS ) //if in range and clicks mouse button and not currently holding anything
         {
+            item.transform.rotation = Quaternion.Euler(0,0,0); //reset the rotation of the item
             item.transform.parent = gameObject.transform ; //stick to players position
             item.transform.position = gameObject.transform.position + transform.forward * 0.7f; //move the item to the players forward position
             heldItems++; //increment held items
-            itemScale = item.transform.localScale;
-            item.transform.localScale = itemScale * 0.5f;
+            item.transform.localScale = item.GetComponent<Item>().heldScale; //change the scale of the item
             controller.radius = 1.0f;
         }
         else if (inRangeGoal && Input.GetKeyDown(KeyCode.Mouse0) && heldItems > 0 && item.gameObject.name == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
         {
-            item.transform.localScale = itemScale;
+            item.transform.rotation = Quaternion.Euler(0,0,0); //reset the rotation of the item
+            item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
+            item.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
             item.transform.parent = itemGoal.transform ; //remove the item from the player
             item.transform.position = itemGoal.transform.position ;//move the item to the position of the goal
             controller.radius = 0.5f;

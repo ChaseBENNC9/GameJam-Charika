@@ -1568,6 +1568,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6f59fb3499b5e1046b901ea64d03996b, type: 2}
+    - target: {fileID: 1426266362543579902, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426266362543579902, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426266362543579902, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3398504952831566033, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1578,15 +1590,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67.41
+      value: -23.48
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.961
+      value: 1.059
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.58
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1773,8 +1785,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: block
   hint: {fileID: 1522402256}
-  hintNoItem: Something is needed to reach up there
-  hintWithItem: Click mouse to place the item
+  hintNoItem: Something is needed to reach up here
+  hintWithItem: Click mouse to place the block
 --- !u!65 &636242553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3064,6 +3076,25 @@ Transform:
   - {fileID: 1478425231}
   m_Father: {fileID: 1335635857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1254544781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3988550443369967362, guid: f0531ae3b6e09294886766b3eb1887e4, type: 3}
+  m_PrefabInstance: {fileID: 1521236142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254544788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254544781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3183251a9feaa944989967478df86e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: block
+  heldScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &1306057114
 GameObject:
   m_ObjectHideFlags: 0
@@ -4175,7 +4206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002790873157037641, guid: f0531ae3b6e09294886766b3eb1887e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.43
+      value: -16.53
       objectReference: {fileID: 0}
     - target: {fileID: 6002790873157037641, guid: f0531ae3b6e09294886766b3eb1887e4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4216,7 +4247,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3988550443369967362, guid: f0531ae3b6e09294886766b3eb1887e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1254544788}
   m_SourcePrefab: {fileID: 100100000, guid: f0531ae3b6e09294886766b3eb1887e4, type: 3}
 --- !u!1 &1522402256
 GameObject:
@@ -4235,7 +4269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1522402257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4244,7 +4278,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522402256}
   m_LocalRotation: {x: 0.026730876, y: 0.627992, z: 0.03899283, w: 0.7767825}
-  m_LocalPosition: {x: 0, y: 0, z: 0.7600002}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.099999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4252,7 +4286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.54, y: 4.92}
+  m_AnchoredPosition: {x: 2.54, y: 4.73}
   m_SizeDelta: {x: 261.6992, y: 37.3237}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522402258
@@ -4275,7 +4309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: hint
+  m_text: Something is needed to reach up here
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5735,6 +5769,7 @@ GameObject:
   - component: {fileID: 6575012344528086998}
   - component: {fileID: 2475237999928243708}
   - component: {fileID: 6575012344528086999}
+  - component: {fileID: 6575012344528087000}
   m_Layer: 0
   m_Name: key
   m_TagString: Item
@@ -5802,7 +5837,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.50000006, z: 0.5, w: 0.50000006}
   m_LocalPosition: {x: -13.435422, y: 4.53, z: 15.550005}
-  m_LocalScale: {x: 29.22, y: 38.7798, z: 38.506443}
+  m_LocalScale: {x: 30, y: 39.81499, z: 39.534336}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1335635857}
@@ -5836,6 +5871,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.16100246, y: 0.0837473, z: 0.0863993}
   m_Center: {x: -0.0085078515, y: 0.0028262215, z: 0.04008697}
+--- !u!114 &6575012344528087000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4218921350334669476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3183251a9feaa944989967478df86e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: key
+  heldScale: {x: 15, y: 20, z: 20}
 --- !u!4 &8035313077173538189
 Transform:
   m_ObjectHideFlags: 0
