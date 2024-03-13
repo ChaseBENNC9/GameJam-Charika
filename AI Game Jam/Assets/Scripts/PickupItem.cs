@@ -105,7 +105,7 @@ public class PickupItem : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation; //freeze the x and z position of the item
             item.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
             item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
-            item.transform.position = gameObject.transform.position + transform.forward * 1.5f; //move the item to the players forward position
+            item.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
             heldItems--; //decrement held items
             controller.radius = 0.5f;
         }
