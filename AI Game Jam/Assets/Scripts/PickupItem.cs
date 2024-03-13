@@ -11,10 +11,11 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    public bool inRange , inRangeGoal;
-    public GameObject item;
-    public GameObject itemGoal;
-
+    private bool inRange , inRangeGoal;
+    private GameObject item;
+    private Vector3 itemScale;
+    private GameObject itemGoal;
+    private CharacterController controller; //Character controller component
     private int heldItems;
     private const int MAXITEMS = 1;
 
@@ -22,6 +23,8 @@ public class PickupItem : MonoBehaviour
     void Start()
     {
         heldItems = 0;
+        controller = gameObject.GetComponent<CharacterController>(); //Gets the character controller component
+
     }   
     void Update()
     {
@@ -70,14 +73,22 @@ public class PickupItem : MonoBehaviour
         if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS ) //if in range and clicks mouse button and not currently holding anything
         {
             item.transform.parent = gameObject.transform ; //stick to players position
-            item.transform.position = gameObject.transform.position + transform.forward * 2; //move the item to the players forward position
+            item.transform.position = gameObject.transform.position + transform.forward * 0.7f; //move the item to the players forward position
             heldItems++; //increment held items
+            itemScale = item.transform.localScale;
+            item.transform.localScale = itemScale * 0.5f;
+            controller.radius = 1.0f;
         }
         else if (inRangeGoal && Input.GetKeyDown(KeyCode.Mouse0) && heldItems > 0 && item.gameObject.name == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
         {
+            item.transform.localScale = itemScale;
             item.transform.parent = itemGoal.transform ; //remove the item from the player
             item.transform.position = itemGoal.transform.position ;//move the item to the position of the goal
+            controller.radius = 0.5f;
+
+
             heldItems--; //decrement held items
+
             itemGoal.GetComponent<ItemGoal>().UseObject();
         }
     }
