@@ -72,8 +72,14 @@ public class PickupItem : MonoBehaviour
         //happens only once/when key press
         if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS ) //if in range and clicks mouse button and not currently holding anything
         {
-            item.transform.rotation = Quaternion.Euler(0,0,0); //reset the rotation of the item
+            Rigidbody rb = item.GetComponent<Rigidbody>(); //get the rigidbody component of the item
+            if(rb != null) //if the item has a rigidbody
+            {
+                Destroy(rb); //destroy the rigidbody
+            }
             item.transform.parent = gameObject.transform ; //stick to players position
+            item.transform.localRotation = Quaternion.Euler(0,0,0); //reset the rotation of the item
+
             item.transform.position = gameObject.transform.position + transform.forward * 0.7f; //move the item to the players forward position
             heldItems++; //increment held items
             item.transform.localScale = item.GetComponent<Item>().heldScale; //change the scale of the item
@@ -93,5 +99,16 @@ public class PickupItem : MonoBehaviour
 
             itemGoal.GetComponent<ItemGoal>().UseObject();
         }
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && heldItems > 0) //if right mouse button is clicked and holding an item
+        {
+            Rigidbody rb = item.AddComponent<Rigidbody>(); //add a rigidbody to the item
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation; //freeze the x and z position of the item
+            item.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
+            item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
+            item.transform.position = gameObject.transform.position + transform.forward * 1.5f; //move the item to the players forward position
+            heldItems--; //decrement held items
+            controller.radius = 0.5f;
+        }
     }
+
 }
