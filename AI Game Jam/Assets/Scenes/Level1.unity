@@ -1590,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67.24
+      value: -27.98
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4094,7 +4094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3082000807855717626, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: Door1Key
       objectReference: {fileID: 0}
     - target: {fileID: 5753077924885856200, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
       propertyPath: type
@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 1763487324}
   - component: {fileID: 1763487323}
   m_Layer: 0
-  m_Name: door
+  m_Name: Door1
   m_TagString: ItemGoal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5769,6 +5769,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1335635857}
     m_Modifications:
     - target: {fileID: 1749932295900897545, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749932295900897545, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749932295900897545, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749932295900897545, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.81
       objectReference: {fileID: 0}
@@ -5808,9 +5820,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1749932295900897545, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3082000807855717626, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: Block1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753077924885856200, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: heldScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753077924885856200, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: heldScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753077924885856200, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+      propertyPath: heldScale.z
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
