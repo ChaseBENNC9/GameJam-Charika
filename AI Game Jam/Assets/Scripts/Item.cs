@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
 
-    public string type;
+    [SerializeField] private string type;
     private Vector3 placedScale;
     public Vector3 PlacedScale { get { return placedScale; } }
     public Vector3 heldScale;
@@ -14,6 +14,10 @@ public class Item : MonoBehaviour
     void Start()
     {
         placedScale = transform.localScale;
+    }
+    public string GetItemType()
+    {
+        return type;
     }
 
 }

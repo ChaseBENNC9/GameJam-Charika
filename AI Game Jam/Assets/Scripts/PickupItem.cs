@@ -43,7 +43,7 @@ public class PickupItem : MonoBehaviour
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
-            if(item.gameObject != null && item.gameObject.name == currentGoal.itemName ) //if the item name is the same as the goal name
+            if(item.gameObject != null &&  item.GetComponent<Item>().GetItemType() == currentGoal.itemName ) //if the item name is the same as the goal name
             {
                 currentGoal.ShowHint(true,currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
             }
@@ -85,7 +85,7 @@ public class PickupItem : MonoBehaviour
             item.transform.localScale = item.GetComponent<Item>().heldScale; //change the scale of the item
             controller.radius = 1.0f;
         }
-        else if (inRangeGoal && Input.GetKeyDown(KeyCode.Mouse0) && heldItems > 0 && item.gameObject.name == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
+        else if (inRangeGoal && Input.GetKeyDown(KeyCode.Mouse0) && heldItems > 0 && item.GetComponent<Item>().GetItemType() == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
         {
             item.transform.rotation = Quaternion.Euler(0,0,0); //reset the rotation of the item
             item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
