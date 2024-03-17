@@ -16,9 +16,9 @@ public class Item : MonoBehaviour
     private Vector3 placedScale;
     public Vector3 PlacedScale { get => placedScale; }
 
-    public Vector3 HeldScale { get => heldScale; }
+  public Vector3 HeldScale { get => heldScale; }
 
-    private Vector3 heldScale;
+      [SerializeField]  private Vector3 heldScale;
 
 
     void Start()
