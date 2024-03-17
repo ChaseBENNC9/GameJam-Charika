@@ -45,16 +45,16 @@ public class PlayerInteraction : MonoBehaviour
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
-            if (
-                item.gameObject != null
-                && item.GetComponent<Item>().GetItemType() == currentGoal.itemName
-            ) //if the item name is the same as the goal name
+            if (item  != null)
             {
-                currentGoal.ShowHint(true, currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
-            }
-            else
-            {
-                itemGoal.GetComponent<ItemGoal>().ShowHint(true, currentGoal.hintNoItem); //show the hint for the goal when the player does not have the item
+                if (item.GetComponent<Item>().GetItemType() == currentGoal.itemName) //if the item name is the same as the goal name
+                {
+                    currentGoal.ShowHint(true, currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
+                }
+                else
+                {
+                    itemGoal.GetComponent<ItemGoal>().ShowHint(true, currentGoal.hintNoItem); //show the hint for the goal when the player does not have the item
+                }
             }
         }
     }
