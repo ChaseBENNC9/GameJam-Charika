@@ -46,7 +46,7 @@ public class PlayerInteraction : MonoBehaviour
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
             if (
-                item.gameObject != null
+                item != null
                 && item.GetComponent<Item>().GetItemType() == currentGoal.itemName
             ) //if the item name is the same as the goal name
             {
