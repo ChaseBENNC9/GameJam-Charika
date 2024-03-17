@@ -45,7 +45,10 @@ public class PlayerInteraction : MonoBehaviour
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
-            if (item != null && item.GetComponent<Item>().GetItemType() == currentGoal.itemName) //if the item name is the same as the goal name
+            if (
+                item.gameObject != null
+                && item.GetComponent<Item>().GetItemType() == currentGoal.itemName
+            ) //if the item name is the same as the goal name
             {
                 currentGoal.ShowHint(true, currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
             }
@@ -91,13 +94,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void UseObject()
     {
-        if (heldItems > 0 && Input.GetKeyDown(KeyCode.Mouse1))
+        if (heldItems > 0)
         {
-            if (
-                inRangeGoal
-                && item.GetComponent<Item>().GetItemType()
-                    == itemGoal.GetComponent<ItemGoal>().itemName
-            ) //if in range of goal and clicks mouse button and holding an item with the correct name
+            if ( inRangeGoal && item.GetComponent<Item>().GetItemType() == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
                 UseObjectAtGoal();
             }
@@ -105,23 +104,28 @@ public class PlayerInteraction : MonoBehaviour
             {
                 DropObject();
             }
-            controller.radius = 0.5f;
-            heldItems--; //decrement held items
+
         }
     }
 
     private void UseObjectAtGoal()
     {
+        if (Input.GetKeyDown(KeyCode.E)) //if in range and clicks mouse button
+        {
         item.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
         item.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
         item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
         item.transform.parent = itemGoal.transform; //remove the item from the player
         item.transform.position = itemGoal.transform.position; //move the item to the position of the goal
         itemGoal.GetComponent<ItemGoal>().UseObject();
+        controller.radius = 0.5f;
+        heldItems--; //decrement held items
+        }
     }
-
     private void DropObject()
     {
+        if(Input.GetKeyDown(KeyCode.Mouse1)) //if in range and clicks mouse button
+        {
         Rigidbody rb = item.AddComponent<Rigidbody>(); //add a rigidbody to the item
         rb.constraints =
             RigidbodyConstraints.FreezePositionX
@@ -131,5 +135,8 @@ public class PlayerInteraction : MonoBehaviour
 
         item.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
         item.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
+                controller.radius = 0.5f;
+            heldItems--; //decrement held items
+    }
     }
 }

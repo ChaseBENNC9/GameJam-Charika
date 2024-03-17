@@ -1380,7 +1380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -63.7
+      value: -24.05
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1388,7 +1388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.57
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1417,6 +1417,10 @@ PrefabInstance:
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281079456272911379, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
+      propertyPath: playerSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1576,7 +1580,7 @@ MonoBehaviour:
   itemName: block
   hint: {fileID: 1522402256}
   hintNoItem: Something is needed to reach up here
-  hintWithItem: Click mouse to place the block
+  hintWithItem: Press E to place the block
 --- !u!65 &636242553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4042,7 +4046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1522402257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4539,7 +4543,7 @@ MonoBehaviour:
   itemName: key
   hint: {fileID: 1375535583}
   hintNoItem: A key is required to unlock the door
-  hintWithItem: Click mouse to unlock door
+  hintWithItem: Press E to unlock door
 --- !u!65 &1763487324
 BoxCollider:
   m_ObjectHideFlags: 0
