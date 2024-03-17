@@ -68,7 +68,7 @@ public class PlayerInteraction : MonoBehaviour
         else if (collider.gameObject.tag == "ItemGoal")
         {
             inRangeGoal = false;
-            itemGoal.GetComponent<ItemGoal>().ShowHint(false, "");
+            itemGoal.GetComponent<ItemGoal>().ShowHint(false);
         }
     }
 
@@ -96,14 +96,17 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (heldItems > 0 && Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (inRangeGoal && item.GetComponent<Item>().GetItemType() == itemGoal.GetComponent<ItemGoal>().itemName
+            if (
+                inRangeGoal
+                && item.GetComponent<Item>().GetItemType()
+                    == itemGoal.GetComponent<ItemGoal>().itemName
             ) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
                 UseObjectAtGoal();
             }
             else
             {
-                DropItem();
+                DropObject();
             }
             item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
             controller.radius = 0.5f;
@@ -120,7 +123,7 @@ public class PlayerInteraction : MonoBehaviour
         itemGoal.GetComponent<ItemGoal>().UseObject();
     }
 
-    private void DropItem()
+    private void DropObject()
     {
         Rigidbody rb = item.AddComponent<Rigidbody>(); //add a rigidbody to the item
         rb.constraints =
@@ -130,5 +133,4 @@ public class PlayerInteraction : MonoBehaviour
         item.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
         item.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
     }
-
 }
