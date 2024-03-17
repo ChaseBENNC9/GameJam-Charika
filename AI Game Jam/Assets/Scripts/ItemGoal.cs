@@ -12,6 +12,7 @@ using TMPro;
 public class ItemGoal : MonoBehaviour
 {
     public string itemName; //what item can be placed here
+    
     public GameObject hint; //the item that can be placed here
     // Start is called before the first frame update
     public string hintNoItem = "";
@@ -19,7 +20,7 @@ public class ItemGoal : MonoBehaviour
 
     public void UseObject()
     {
-       if(gameObject.name == "door")
+       if(gameObject.name.Contains("Door"))
         {
             GameObject.Destroy(gameObject);
         }

@@ -108,7 +108,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 DropObject();
             }
-            item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
             controller.radius = 0.5f;
             heldItems--; //decrement held items
         }
@@ -118,6 +117,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         item.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
         item.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
+        item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
         item.transform.parent = itemGoal.transform; //remove the item from the player
         item.transform.position = itemGoal.transform.position; //move the item to the position of the goal
         itemGoal.GetComponent<ItemGoal>().UseObject();
@@ -130,6 +130,8 @@ public class PlayerInteraction : MonoBehaviour
             RigidbodyConstraints.FreezePositionX
             | RigidbodyConstraints.FreezePositionZ
             | RigidbodyConstraints.FreezeRotation; //freeze the x and z position of the item
+        item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
+
         item.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
         item.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
     }
