@@ -15,14 +15,14 @@ public class ItemGoal : MonoBehaviour
     
     public GameObject hint; //the item that can be placed here
     // Start is called before the first frame update
-    public string hintNoItem = "";
+    public string hintNoItem = ""; //initalizes the hints as empty
     public string hintWithItem = "";
 
     public void UseObject()
     {
-       if(gameObject.name.Contains("Door"))
+       if(gameObject.name.Contains("Door")) //if the objects name contains Door it will destroy itself
         {
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject); 
         }
         else
         {

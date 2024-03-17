@@ -11,23 +11,28 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField]
+    private string type; //This is the type of item it is eg key, block, axe
+    public string Type
+    {
+        get => type;
+    } //Creates a get for the type so other scripts can read its value
+    private Vector3 placedScale; //this is the scale that the object should be when it is placed in the world
+    public Vector3 PlacedScale
+    {
+        get => placedScale;
+    } //Creates a get for the placed scale so other scripts can read its value
 
-    [SerializeField] private string type;
-    private Vector3 placedScale;
-    public Vector3 PlacedScale { get => placedScale; }
+    public Vector3 HeldScale
+    {
+        get => heldScale;
+    } //Creates a get for the held scale so other scripts can read its value
 
-  public Vector3 HeldScale { get => heldScale; }
-
-      [SerializeField]  private Vector3 heldScale;
-
+    [SerializeField]
+    private Vector3 heldScale; //this is the scale that the object should be when it is held by the player
 
     void Start()
     {
         placedScale = transform.localScale;
     }
-    public string GetItemType()
-    {
-        return type;
-    }
-
 }

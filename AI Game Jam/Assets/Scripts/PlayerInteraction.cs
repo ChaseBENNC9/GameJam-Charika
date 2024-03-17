@@ -47,7 +47,7 @@ public class PlayerInteraction : MonoBehaviour
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
             if (
                 item != null
-                && item.GetComponent<Item>().GetItemType() == currentGoal.itemName
+                && item.GetComponent<Item>().Type == currentGoal.itemName
             ) //if the item name is the same as the goal name
             {
                 currentGoal.ShowHint(true, currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
@@ -96,7 +96,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (heldItems > 0)
         {
-            if ( inRangeGoal && item.GetComponent<Item>().GetItemType() == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
+            if ( inRangeGoal && item.GetComponent<Item>().Type == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
                 UseObjectAtGoal();
             }
