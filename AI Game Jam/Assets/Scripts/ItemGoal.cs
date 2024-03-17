@@ -14,7 +14,6 @@ public class ItemGoal : MonoBehaviour
     public string itemName; //what item can be placed here
     
     public GameObject hint; //the item that can be placed here
-    // Start is called before the first frame update
     public string hintNoItem = ""; //initalizes the hints as empty
     public string hintWithItem = "";
 
