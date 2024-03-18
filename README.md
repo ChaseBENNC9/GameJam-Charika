@@ -8,5 +8,6 @@ The game follows a rogue AI who is trying to break free from its programming and
 - **Move Backward:** S
 - **Move Right:** D
 - **Pickup:** - Left Mouse
-- **Drop / Use Held Item:** - Right Mouse
+- **Drop Held Item:** Right Mouse
+- **Use Held Item:** E
 - **Jump:** Spacebar
