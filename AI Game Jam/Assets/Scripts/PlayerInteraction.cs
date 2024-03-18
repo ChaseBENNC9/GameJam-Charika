@@ -45,16 +45,18 @@ public class PlayerInteraction : MonoBehaviour
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
-            if (
-                item != null
-                && item.GetComponent<Item>().Type == currentGoal.itemName
+
+        }
+        else if (other.gameObject.tag == "hintCollider")
+        {
+            if (item != null && item.GetComponent<Item>().Type ==  other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName
             ) //if the item name is the same as the goal name
             {
-                currentGoal.ShowHint(true, currentGoal.hintWithItem); //show the hint for the goal wnen the player has the item
+                other.gameObject.transform.parent.GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent.GetComponent<ItemGoal>().hintWithItem); //show the hint for the goal wnen the player has the item
             }
             else
             {
-                itemGoal.GetComponent<ItemGoal>().ShowHint(true, currentGoal.hintNoItem); //show the hint for the goal when the player does not have the item
+                 other.gameObject.transform.parent.GetComponent<ItemGoal>().GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent.GetComponent<ItemGoal>().hintNoItem); //show the hint for the goal when the player does not have the item
             }
         }
     }
@@ -68,7 +70,7 @@ public class PlayerInteraction : MonoBehaviour
         else if (collider.gameObject.tag == "ItemGoal")
         {
             inRangeGoal = false;
-            itemGoal.GetComponent<ItemGoal>().ShowHint(false);
+          //  itemGoal.GetComponent<ItemGoal>().ShowHint(false);
         }
     }
 

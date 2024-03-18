@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - ItemGoal
+  - hintCollider
   layers:
   - Default
   - TransparentFX
