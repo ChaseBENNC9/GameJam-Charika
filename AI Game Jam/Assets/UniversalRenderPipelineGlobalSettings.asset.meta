@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 853247e4498ad22448c1a5e4f86dd4d9
+=======
 guid: a2e31840b7e9cc3498c4f9520982aebc
+>>>>>>> staging
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
