@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y = 0f; //Ensures that the player doesnt move when it is touching the ground
         }
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); //Sets move to the input of each axis (WASD or arrow keys)
-        controller.Move(move * Time.deltaTime * playerSpeed); //moves the player based on the input of the player
+        Vector3 move = new(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); //Sets move to the input of each axis (WASD or arrow keys)
+        controller.Move(playerSpeed * Time.deltaTime * move); //moves the player based on the input of the player
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move; //Changes the direction the player is facing based on the input of the player
