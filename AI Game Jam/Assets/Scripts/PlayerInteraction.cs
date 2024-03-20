@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     private Vector3 itemScale;
     private GameObject itemGoal;
     private CharacterController controller; //Character controller component
-    private int heldItems;
+    public int heldItems;
     private const int MAXITEMS = 1;
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         PickUp();
-        if(item !=null && itemGoal !=null)
+        if(item !=null)
             UseObject();
     }
 
@@ -111,6 +111,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void UseObject()
     {
+       Debug.Log("using object");  
         if (heldItems > 0)
         {
             if (
