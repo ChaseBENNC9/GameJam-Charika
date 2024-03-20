@@ -15,10 +15,7 @@ public class CameraFollow : MonoBehaviour
 
     public GameObject Player { get => player; set => player = value; }
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-    }
+
     void Start()
     {
         offset = new Vector3(0,10f,-20f); //The Camera will be 2.5 units above the player (Y) and 7 units behind the player (Z)
