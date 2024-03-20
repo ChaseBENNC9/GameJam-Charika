@@ -2,7 +2,7 @@
 * Description: This is used to manage details of the level such as checkpoints and respawning the player at the active checkpoint.
 * Author: Chase Bennett-Hill
 * Last Modified: 20 / 03 / 2024
-* Last Modified By: Chase Bennett-Hill
+* 
 */
 
 using System.Collections;
@@ -18,10 +18,7 @@ public class LevelManager : MonoBehaviour
 
     // Start is called before the first frame update
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject); //Ensures that the level manager persists between scenes
-    }
+
 
     void Start()
     {
