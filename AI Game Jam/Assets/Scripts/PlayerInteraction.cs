@@ -31,8 +31,8 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         PickUp();
-        if(heldItem !=null)
-            UseObject();
+
+        UseObject();
     }
 
     void OnTriggerEnter(Collider other)
@@ -107,14 +107,14 @@ public class PlayerInteraction : MonoBehaviour
 
             heldItem.transform.position = gameObject.transform.position + transform.forward * 0.7f; //move the item to the players forward position
             heldItems++; //increment held items
-            heldItem.transform.localScale = item.GetComponent<Item>().HeldScale; //change the scale of the item
+            heldItem.transform.localScale = heldItem.GetComponent<Item>().HeldScale; //change the scale of the item
             controller.radius = 1.0f;
         }
     }
 
     private void UseObject()
     {
-        if (heldItems > 0)
+        if (heldItems > 0 && heldItem != null)
         {
             if (
                 inRangeGoal
@@ -160,6 +160,7 @@ public class PlayerInteraction : MonoBehaviour
             heldItems--; //decrement held items
             Debug.Log("Using itemxGOAL");
             heldItem = null;
+            item = null;
         }
     }
 
@@ -180,6 +181,7 @@ public class PlayerInteraction : MonoBehaviour
             heldItems--; //decrement held items
             Debug.Log("Using itemxDROP");
             heldItem = null;
+            item = null;
         }
     }
 }
