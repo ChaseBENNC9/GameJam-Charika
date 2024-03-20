@@ -12,9 +12,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public List<Checkpoint> checkpoints;
-    public Checkpoint activeCheckpoint;
-    public GameObject playerprefab;
+    [SerializeField] private List<Checkpoint> checkpoints;
+    private Checkpoint activeCheckpoint;
+  [SerializeField] private GameObject playerprefab;
+    public static LevelManager instance;
 
     // Start is called before the first frame update
 
@@ -22,12 +23,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        if (FindObjectOfType<LevelManager>() != this)
-        {
-            Destroy(gameObject);
-        }
-        print("New Checkpoint Manager");
-
+        instance = this;
         checkpoints = new List<Checkpoint>();
         foreach (Checkpoint checkpoint in FindObjectsOfType<Checkpoint>())
         {
@@ -58,18 +54,18 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         GameObject player = GameObject.Find("Player");
         Destroy(player);
-            GameObject p = GameObject.Instantiate(
+            GameObject respawnPlayer = GameObject.Instantiate(
                 playerprefab,
                 new Vector3(activeCheckpoint.location.x, 1.08f, activeCheckpoint.location.z),
                 Quaternion.identity
             );
-            p.name = "Player";
-            p.tag = "Player";
-            FindAnyObjectByType<CameraFollow>().Player = p;
+            respawnPlayer.name = "Player";
+            respawnPlayer.tag = "Player";
+            FindAnyObjectByType<CameraFollow>().Player = respawnPlayer;
     }
     
 }
