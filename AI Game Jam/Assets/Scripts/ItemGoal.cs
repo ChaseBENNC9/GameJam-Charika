@@ -6,26 +6,66 @@
 */
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ItemGoal : MonoBehaviour
 {
     public string itemName; //what item can be placed here
-    
     public GameObject hint; //the item that can be placed here
     public string hintNoItem = ""; //initalizes the hints as empty
     public string hintWithItem = "";
 
-    public void UseObject()
+    [SerializeField]
+    private bool isComplex; //if the hint should be shown
+    public bool IsComplex
     {
-       if(gameObject.name.Contains("Door")) //if the objects name contains Door it will destroy itself
+        get => isComplex;
+    } //Creates a get for the isComplex so other scripts can read its value
+    public List<GameObject> items;
+    public int itemsNeeded;
+
+    void Start()
+    {
+        if (isComplex)
+            items = new List<GameObject>();
+    }
+
+    public void UseObject(GameObject item)
+    {
+        Item i = item.GetComponent<Item>();
+        if (isComplex)
         {
-            GameObject.Destroy(gameObject); 
+            if (items.Count < itemsNeeded && i.Type == itemName) //if the item is not already in the list and the item is the correct type
+            {
+                Debug.Log("Item placed in " + gameObject.name);
+                items.Add(item);
+            }
+    
         }
+        
         else
         {
-            Debug.Log("Item placed in " + gameObject.name);
+            if (gameObject.name.Contains("Door")) //if the objects name contains Door it will destroy itself
+            {
+                GameObject.Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("Item placed in " + gameObject.name);
+            }
+        }
+    }
+
+
+    public void UseComplexPuzzle()
+    {
+        if (items.Count == itemsNeeded)
+        {
+            if (gameObject.name.Contains("Door")) //if the objects name contains Door it will destroy itself
+            {
+                GameObject.Destroy(gameObject);
+            }
         }
     }
 
@@ -34,5 +74,4 @@ public class ItemGoal : MonoBehaviour
         hint.GetComponent<TMP_Text>().text = hintstring;
         hint.SetActive(show);
     }
-
 }
