@@ -23,13 +23,17 @@ public class Item : MonoBehaviour
         get => placedScale;
     } //Creates a get for the placed scale so other scripts can read its value
 
+    [SerializeField] private Vector3 placedPosition = Vector3.zero; //this is the position that the object should be when it is placed in the world relative to its goal parent
     public Vector3 HeldScale
     {
         get => heldScale;
     } //Creates a get for the held scale so other scripts can read its value
+    public Vector3 PlacedPosition { get => placedPosition; set => placedPosition = value; }
 
     [SerializeField]
     private Vector3 heldScale; //this is the scale that the object should be when it is held by the player
+
+    public int priority = 0;  //this is the priority of the item in the list of items that are needed to complete the puzzle lower numbers are needed first
 
     void Start()
     {

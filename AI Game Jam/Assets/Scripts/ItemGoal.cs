@@ -23,7 +23,7 @@ public class ItemGoal : MonoBehaviour
         get => isComplex;
     } //Creates a get for the isComplex so other scripts can read its value
     public List<GameObject> items;
-    public int itemsNeeded;
+    public int itemsNeeded; //could become const
 
     void Start()
     {
@@ -31,16 +31,37 @@ public class ItemGoal : MonoBehaviour
             items = new List<GameObject>();
     }
 
+
+    public bool CanUseObject(GameObject item)
+    {
+             if (isComplex)
+             {
+             Item i = item.GetComponent<Item>();
+
+            if (items.Count < itemsNeeded && i.Type == itemName && i.priority == items.Count + 1 ) //if the item is not already in the list and the item is the correct type
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+             }
+                else
+                {
+                    return true;
+                }
+
+    }
     public void UseObject(GameObject item)
     {
-        Item i = item.GetComponent<Item>();
+        Debug.Log("Item used in " + gameObject.name);
         if (isComplex)
         {
-            if (items.Count < itemsNeeded && i.Type == itemName) //if the item is not already in the list and the item is the correct type
-            {
-                Debug.Log("Item placed in " + gameObject.name);
+    
                 items.Add(item);
-            }
+            
     
         }
         
@@ -66,7 +87,14 @@ public class ItemGoal : MonoBehaviour
             {
                 GameObject.Destroy(gameObject);
             }
+
+            if (gameObject.name.Contains("WheelGoal")) //if the objects name contains Lever it will destroy itself
+            {
+                Debug.Log("Wheel turned and water drained");
+            }
         }
+
+        
     }
 
     public void ShowHint(bool show, string hintstring = "")
