@@ -16,7 +16,7 @@ public class ItemGoal : MonoBehaviour
     public GameObject hint; //the item that can be placed here
     public string hintNoItem = ""; //initalizes the hints as empty
     public string hintWithItem = "";
-    [SerializeField] private UnityEvent goalAction;
+    [SerializeField] private UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met
 
     [SerializeField]
     private bool isComplex; //if the hint should be shown
@@ -69,7 +69,7 @@ public class ItemGoal : MonoBehaviour
         
         else
         {
-            goalAction.Invoke();
+            goalAction.Invoke(); //Calls the action for the goal
 
         }
     }
@@ -91,7 +91,7 @@ public class ItemGoal : MonoBehaviour
         hint.SetActive(show);
     }
 
-    public void GoalActionDrainWater()
+    public void GoalActionDrainWater() //This method will be run by the goal action when the goal is completed if it is set in the inspector
     {
         Debug.Log("Goal Action Invoked");
         Debug.Log("Wheel turned and water drained");
