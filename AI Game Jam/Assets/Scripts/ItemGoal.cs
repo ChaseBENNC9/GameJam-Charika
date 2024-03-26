@@ -16,6 +16,7 @@ public class ItemGoal : MonoBehaviour
     public GameObject hint; //the item that can be placed here
     public string hintNoItem = ""; //initalizes the hints as empty
     public string hintWithItem = "";
+    public string hintAction = "";
     [SerializeField] private UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met
 
     [SerializeField]
@@ -42,6 +43,8 @@ public class ItemGoal : MonoBehaviour
 
             if (items.Count < itemsNeeded && i.Type == itemName && i.priority == items.Count + 1 ) //if the item is not already in the list and the item is the correct type
             {
+                ShowHint(true, hintAction);
+
                 return true;
             }
             else
@@ -66,6 +69,7 @@ public class ItemGoal : MonoBehaviour
              }
                 else
                 {
+                    ShowHint(true, hintAction);
                     return true;
                 }
     }
