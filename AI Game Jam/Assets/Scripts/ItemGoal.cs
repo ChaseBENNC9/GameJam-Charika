@@ -46,16 +46,30 @@ public class ItemGoal : MonoBehaviour
             }
             else
             {
+                if(i.priority != items.Count + 1 )
+                {
+                    ShowHint(true, "Something is needed before \n this item can be placed here");
+                }
+                 if (i.Type != itemName)
+                {
+                    ShowHint(true, "This item cannot be used here");
+                }
+                 if (items.Count >= itemsNeeded)
+                {
+                    ShowHint(true, "No more items are needed here");
+                }
+    
                 return false;
-            }
+    
 
+             }
              }
                 else
                 {
                     return true;
                 }
-
     }
+    
     public void UseObject(GameObject item)
     {
         Debug.Log("Item used in " + gameObject.name);

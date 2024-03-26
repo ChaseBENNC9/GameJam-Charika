@@ -89,12 +89,16 @@ public class PlayerInteraction : MonoBehaviour
             itemGoal = null;
             //  itemGoal.GetComponent<ItemGoal>().ShowHint(false);
         }
+        if (collider.gameObject.tag == "hintCollider")
+        {
+            collider.gameObject.transform.parent.GetComponent<ItemGoal>().ShowHint(false);
+        }
     }
 
     private void PickUp()
     {
         //happens only once/when key press
-        if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS) //if in range and clicks mouse button and not currently holding anything
+        if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS && item !=null) //if in range and clicks mouse button and not currently holding anything
         {
             Debug.Log("Picking up item");
             if (item.TryGetComponent<Rigidbody>(out var rb)) //if the item has a rigidbody
@@ -118,7 +122,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (
                 inRangeGoal
-                && heldItem.GetComponent<Item>().Type == itemGoal.GetComponent<ItemGoal>().itemName 
             ) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
                 UseObjectAtGoal();
