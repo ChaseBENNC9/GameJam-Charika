@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemGoal : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ItemGoal : MonoBehaviour
     public GameObject hint; //the item that can be placed here
     public string hintNoItem = ""; //initalizes the hints as empty
     public string hintWithItem = "";
+    [SerializeField] private UnityEvent goalAction;
 
     [SerializeField]
     private bool isComplex; //if the hint should be shown
@@ -67,14 +69,8 @@ public class ItemGoal : MonoBehaviour
         
         else
         {
-            if (gameObject.name.Contains("Door")) //if the objects name contains Door it will destroy itself
-            {
-                GameObject.Destroy(gameObject);
-            }
-            else
-            {
-                Debug.Log("Item placed in " + gameObject.name);
-            }
+            goalAction.Invoke();
+
         }
     }
 
@@ -83,15 +79,7 @@ public class ItemGoal : MonoBehaviour
     {
         if (items.Count == itemsNeeded)
         {
-            if (gameObject.name.Contains("Door")) //if the objects name contains Door it will destroy itself
-            {
-                GameObject.Destroy(gameObject);
-            }
-
-            if (gameObject.name.Contains("WheelGoal")) //if the objects name contains Lever it will destroy itself
-            {
-                Debug.Log("Wheel turned and water drained");
-            }
+            goalAction.Invoke();
         }
 
         
@@ -101,5 +89,18 @@ public class ItemGoal : MonoBehaviour
     {
         hint.GetComponent<TMP_Text>().text = hintstring;
         hint.SetActive(show);
+    }
+
+    public void GoalActionDrainWater()
+    {
+        Debug.Log("Goal Action Invoked");
+        Debug.Log("Wheel turned and water drained");
+    }
+    public void GoalActionOpenDoor()
+    {
+        Debug.Log("Goal Action Invoked");
+        Debug.Log("Door opened");
+        GameObject.Destroy(gameObject);
+
     }
 }
