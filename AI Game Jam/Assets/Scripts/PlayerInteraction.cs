@@ -47,6 +47,7 @@ public class PlayerInteraction : MonoBehaviour
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
+
         }
         else if (other.gameObject.tag == "hintCollider")
         {
@@ -137,7 +138,7 @@ public class PlayerInteraction : MonoBehaviour
         else if (heldItems == 0 && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KeyCode.E))
         {
   
-            itemGoal.GetComponent<ItemGoal>().UseComplexPuzzle();
+            itemGoal.GetComponent<ComplexGoal>().UseObject();
             
         }
 
