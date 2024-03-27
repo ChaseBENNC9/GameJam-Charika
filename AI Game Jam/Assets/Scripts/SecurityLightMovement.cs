@@ -5,7 +5,6 @@ Last Modified: 18 / 03 / 2024
 Last Modified By: Erika Stuart
 */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SecurityLightMovement : MonoBehaviour

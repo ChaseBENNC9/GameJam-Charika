@@ -5,9 +5,7 @@
 * Last Modified By: Chase Bennett-Hill
 */
 
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ComplexGoal : ItemGoal
