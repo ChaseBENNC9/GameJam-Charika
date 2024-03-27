@@ -52,8 +52,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (
                 item != null
-                && item.GetComponent<Item>().Type
-                    == other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName
+                && item.GetComponent<Item>().Type.ToLower()
+                    == other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName.ToLower()
             ) //if the item name is the same as the goal name
             {
                 other
@@ -65,6 +65,7 @@ public class PlayerInteraction : MonoBehaviour
             }
             else
             {
+
                 other
                     .gameObject.transform.parent.GetComponent<ItemGoal>()
                     .GetComponent<ItemGoal>()

@@ -23,7 +23,7 @@ public class ComplexGoal : ItemGoal
     {
         Item i = item.GetComponent<Item>();
 
-        if (items.Count < itemsNeeded && i.Type == itemName && i.priority == items.Count + 1) //if the item is not already in the list and the item is the correct type
+        if (items.Count < itemsNeeded && i.Type.ToLower() == itemName.ToLower() && i.priority == items.Count + 1) //if the item is not already in the list and the item is the correct type
         {
             ShowHint(true, hintAction);
 
@@ -35,7 +35,7 @@ public class ComplexGoal : ItemGoal
             {
                 ShowHint(true, "Something is needed before \n this item can be placed here");
             }
-            if (i.Type != itemName)
+            if (i.Type.ToLower() != itemName.ToLower())
             {
                 ShowHint(true, "This item cannot be used here");
             }

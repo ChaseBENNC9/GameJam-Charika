@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2771e81499a7d734798a4a7c9cc10eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: key
+  itemName: KEY
   hint: {fileID: 375528548}
   hintNoItem: A key is required to unlock the door
   hintWithItem: Press E to unlock door
