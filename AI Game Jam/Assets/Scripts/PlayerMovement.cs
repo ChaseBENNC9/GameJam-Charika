@@ -4,8 +4,8 @@
 * Last Modified: 7 / 03 / 24
 * Last Modified By: Chase Bennett-Hill
 */
-using System.Collections;
-using System.Collections.Generic;
+
+
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
