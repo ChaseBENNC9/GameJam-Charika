@@ -1,11 +1,11 @@
 /*
-* Description: This script is used to manage the area where the player can place items. It also shows hints for the goals when the player is in range of the goal.
+* Description: This script is used to manage the area where the player can place items. 
+It also shows hints for the goals when the player is in range of the goal. This class is a parent of the ComplexGoal class
 * Author: Chase Bennett-Hill
-* Last Modified: 13 / 03 / 24
+* Last Modified: 28 / 03 / 24
 * Last Modified By: Chase Bennett-Hill
 */
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,9 +19,9 @@ public class ItemGoal : MonoBehaviour
     public string hintAction = "";
 
     [SerializeField]
-    protected UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met
+    protected UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met protected so it can be accessed by child classes
 
-    protected bool isComplex; //if the hint should be shown
+    protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
     public bool IsComplex
     {
         get => isComplex;

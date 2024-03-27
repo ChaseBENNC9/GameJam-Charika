@@ -1,7 +1,7 @@
 /*
 * Description: This is a child class of Item Goal and manages changed methods for complex type goals.
 * Author: Chase Bennett-Hill
-* Last Modified: 13 / 03 / 24
+* Last Modified: 28 / 03 / 24
 * Last Modified By: Chase Bennett-Hill
 */
 
@@ -21,7 +21,7 @@ public class ComplexGoal : ItemGoal
         items = new List<GameObject>();
     }
 
-    public new bool CanUseObject(GameObject item)
+    public new bool CanUseObject(GameObject item) 
     {
         Item i = item.GetComponent<Item>();
 
@@ -50,16 +50,17 @@ public class ComplexGoal : ItemGoal
         }
     }
 
-    public new void UseObject(GameObject item = null)
+    public new void UseObject(GameObject item = null) // This method will check if the goal has all of its required items and either run the goal action or add the held item to the list
     {
         Debug.Log("Item used in " + gameObject.name);
-        if (items.Count == itemsNeeded && item == null)
+        if (items.Count == itemsNeeded && item == null)  //if the goal has all of its required items and nothing was passed in for the item
         {
-            goalAction.Invoke();
+            goalAction.Invoke(); //Calls the action for the goal
         }
+
         else
         {
-            items.Add(item);
+            items.Add(item); //add the item to the list
         }
     }
 }
