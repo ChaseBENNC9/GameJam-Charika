@@ -5,19 +5,19 @@
 * Last Modified By: Chase Bennett-Hill
 */
 
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
     private bool inRange,
         inRangeGoal;
-    private GameObject item;
+    public GameObject item;
+    public GameObject heldItem;
     private Vector3 itemScale;
-    private GameObject itemGoal;
+    public GameObject itemGoal;
     private CharacterController controller; //Character controller component
-    private int heldItems;
+    public int heldItems;
     private const int MAXITEMS = 1;
 
     // Update is called once per frame
@@ -30,6 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         PickUp();
+
         UseObject();
     }
 
@@ -45,18 +46,20 @@ public class PlayerInteraction : MonoBehaviour
             inRangeGoal = true; //set inRangeGoal to true
             itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
             ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
-
         }
         else if (other.gameObject.tag == "hintCollider")
         {
-            if (item != null && item.GetComponent<Item>().Type ==  other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName
-            ) //if the item name is the same as the goal name
+            if (item != null && item.GetComponent<Item>().Type.ToLower() == other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName.ToLower()) //if the item name is the same as the goal name
             {
-                other.gameObject.transform.parent.GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent.GetComponent<ItemGoal>().hintWithItem); //show the hint for the goal wnen the player has the item
+                other.gameObject.transform.parent
+                .GetComponent<ItemGoal>().ShowHint( true,other.gameObject.transform.parent
+                .GetComponent<ItemGoal>().hintWithItem); //show the hint for the goal wnen the player has the item
             }
             else
             {
-                 other.gameObject.transform.parent.GetComponent<ItemGoal>().GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent.GetComponent<ItemGoal>().hintNoItem); //show the hint for the goal when the player does not have the item
+                other.gameObject.transform.parent.GetComponent<ItemGoal>()
+                .GetComponent<ItemGoal>().ShowHint(true,other.gameObject.transform.parent
+                .GetComponent<ItemGoal>().hintNoItem); //show the hint for the goal when the player does not have the item
             }
         }
     }
@@ -66,39 +69,46 @@ public class PlayerInteraction : MonoBehaviour
         if (collider.gameObject.tag == "Item")
         {
             inRange = false;
+            item = null;
         }
         else if (collider.gameObject.tag == "ItemGoal")
         {
             inRangeGoal = false;
-          //  itemGoal.GetComponent<ItemGoal>().ShowHint(false);
+            itemGoal = null;
+            //  itemGoal.GetComponent<ItemGoal>().ShowHint(false);
+        }
+        if (collider.gameObject.tag == "hintCollider")
+        {
+            collider.gameObject.transform.parent.GetComponent<ItemGoal>().ShowHint(false);
         }
     }
 
     private void PickUp()
     {
         //happens only once/when key press
-        if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS) //if in range and clicks mouse button and not currently holding anything
+        if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS && item != null) //if in range and clicks mouse button and not currently holding anything
         {
             Debug.Log("Picking up item");
             if (item.TryGetComponent<Rigidbody>(out var rb)) //if the item has a rigidbody
             {
                 Destroy(rb); //destroy the rigidbody
             }
-            item.transform.parent = gameObject.transform; //stick to players position
-            item.transform.localRotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
+            heldItem = item; //assign the heldItem as the item
+            heldItem.transform.parent = gameObject.transform; //stick to players position
+            heldItem.transform.localRotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
 
-            item.transform.position = gameObject.transform.position + transform.forward * 0.7f; //move the item to the players forward position
+            heldItem.transform.position = gameObject.transform.position + transform.forward * 0.7f; //move the item to the players forward position
             heldItems++; //increment held items
-            item.transform.localScale = item.GetComponent<Item>().HeldScale; //change the scale of the item
+            heldItem.transform.localScale = heldItem.GetComponent<Item>().HeldScale; //change the scale of the item
             controller.radius = 1.0f;
         }
     }
 
     private void UseObject()
     {
-        if (heldItems > 0)
+        if (heldItems > 0 && heldItem != null)
         {
-            if ( inRangeGoal && item.GetComponent<Item>().Type == itemGoal.GetComponent<ItemGoal>().itemName) //if in range of goal and clicks mouse button and holding an item with the correct name
+            if (inRangeGoal) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
                 UseObjectAtGoal();
             }
@@ -106,39 +116,55 @@ public class PlayerInteraction : MonoBehaviour
             {
                 DropObject();
             }
-
+        }
+        else if (heldItems == 0 && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KeyCode.E)
+        )
+        {
+            itemGoal.GetComponent<ComplexGoal>().UseObject();
         }
     }
 
     private void UseObjectAtGoal()
     {
-        if (Input.GetKeyDown(KeyCode.E)) //if in range and clicks mouse button
+        if (Input.GetKeyDown(KeyCode.E) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
         {
-        item.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
-        item.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
-        item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
-        item.transform.parent = itemGoal.transform; //remove the item from the player
-        item.transform.position = itemGoal.transform.position; //move the item to the position of the goal
-        itemGoal.GetComponent<ItemGoal>().UseObject();
-        controller.radius = 0.5f;
-        heldItems--; //decrement held items
+            heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
+            heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
+            heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
+            heldItem.transform.parent = itemGoal.transform; //remove the item from the player
+            heldItem.transform.position = itemGoal.transform.position; //move the item to the position of the goal
+            heldItem.transform.localPosition = heldItem.GetComponent<Item>().PlacedPosition; //move the heldItem to the local position of the goal
+            if (item.TryGetComponent<BoxCollider>(out var rb)) //if the item has a rigidbody
+            {
+                Destroy(rb); //destroy the rigidbody
+            }
+            itemGoal.GetComponent<ItemGoal>().UseObject(heldItem);
+            controller.radius = 0.5f;
+            heldItems--; //decrement held items
+            Debug.Log("Using itemxGOAL");
+            heldItem = null;
+            item = null;
         }
     }
+
     private void DropObject()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse1)) //if in range and clicks mouse button
+        if (Input.GetKeyDown(KeyCode.Mouse1)) //if in range and clicks mouse button
         {
-        Rigidbody rb = item.AddComponent<Rigidbody>(); //add a rigidbody to the item
-        rb.constraints =
-            RigidbodyConstraints.FreezePositionX
-            | RigidbodyConstraints.FreezePositionZ
-            | RigidbodyConstraints.FreezeRotation; //freeze the x and z position of the item
-        item.transform.localScale = item.GetComponent<Item>().PlacedScale; //change the scale of the item
+            Rigidbody rb = heldItem.AddComponent<Rigidbody>(); //add a rigidbody to the item
+            rb.constraints =
+                RigidbodyConstraints.FreezePositionX
+                | RigidbodyConstraints.FreezePositionZ
+                | RigidbodyConstraints.FreezeRotation; //freeze the x and z position of the item
+            heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
 
-        item.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
-        item.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
-                controller.radius = 0.5f;
+            heldItem.transform.parent = GameObject.Find("Level").transform; //remove the item from the player
+            heldItem.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
+            controller.radius = 0.5f;
             heldItems--; //decrement held items
-    }
+            Debug.Log("Using itemxDROP");
+            heldItem = null;
+            item = null;
+        }
     }
 }
