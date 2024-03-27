@@ -1,5 +1,5 @@
 /*
-* Description: This script is used to manage the area where the player can place items. 
+* Description: This script is used to manage the area where the player can place items.
 It also shows hints for the goals when the player is in range of the goal. This class is a parent of the ComplexGoal class
 * Author: Chase Bennett-Hill
 * Last Modified: 28 / 03 / 24
@@ -27,9 +27,6 @@ public class ItemGoal : MonoBehaviour
         get => isComplex;
     } //Creates a get for the isComplex so other scripts can read its value
 
-
-
-
     public bool CanUseObject(GameObject item)
     {
         ShowHint(true, hintAction);
@@ -40,10 +37,8 @@ public class ItemGoal : MonoBehaviour
     {
         Debug.Log("Item used in " + gameObject.name);
 
-         goalAction.Invoke(); //Calls the action for the goal
+        goalAction.Invoke(); //Calls the action for the goal
     }
-
-
 
     public void ShowHint(bool show, string hintstring = "")
     {
@@ -53,14 +48,12 @@ public class ItemGoal : MonoBehaviour
 
     public void GoalActionDrainWater() //This method will be run by the goal action when the goal is completed if it is set in the inspector
     {
-        Debug.Log("Goal Action Invoked");
-        Debug.Log("Wheel turned and water drained");
+
     }
 
     public void GoalActionOpenDoor()
     {
-        Debug.Log("Goal Action Invoked");
-        Debug.Log("Door opened");
+
         Destroy(gameObject);
     }
 }
