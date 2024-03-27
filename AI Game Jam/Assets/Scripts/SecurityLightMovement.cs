@@ -13,7 +13,7 @@ public class SecurityLightMovement : MonoBehaviour
     private Vector3 range; //the area the light can move in
     private Vector3 targetPos; //the position the light is moving to
     private const int lightHeight = 12; //the height of the light
-    private const int rangeValue = 40; //the value for the range
+    private const int rangeValue = 35; //the value for the range
 
     // Start is called before the first frame update
     void Start()

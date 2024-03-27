@@ -49,13 +49,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R)) //Temporarily used to test the respawn function
-        {
-            Respawn();
-        }
-    }
+
 
     public void Respawn() //respawns the player at the active checkpoint
     {

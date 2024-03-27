@@ -14,7 +14,7 @@ public class SecurityLight : MonoBehaviour
     {
         if (other.tag == "Player") //if the player enters the trigger
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name); //loads the same scene
+           LevelManager.instance.Respawn(); //game over
         }
     }
 }
