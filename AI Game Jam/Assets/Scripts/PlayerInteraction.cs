@@ -139,7 +139,14 @@ public class PlayerInteraction : MonoBehaviour
             {
                 Destroy(rb); //destroy the rigidbody
             }
-            itemGoal.GetComponent<ItemGoal>().UseObject(heldItem);
+            if(itemGoal.GetComponent<ItemGoal>().IsComplex)
+            {
+                itemGoal.GetComponent<ComplexGoal>().UseObject(heldItem);
+            }
+            else
+            {
+                itemGoal.GetComponent<ItemGoal>().UseObject(heldItem);
+            }
             controller.radius = 0.5f;
             heldItems--; //decrement held items
             Debug.Log("Using itemxGOAL");
