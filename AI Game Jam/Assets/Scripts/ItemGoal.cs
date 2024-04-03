@@ -21,7 +21,7 @@ public class ItemGoal : MonoBehaviour
     [SerializeField]
     protected UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met protected so it can be accessed by child classes
 
-    protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
+    [SerializeField] protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
     public bool IsComplex
     {
         get => isComplex;
