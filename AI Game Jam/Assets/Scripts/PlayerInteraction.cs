@@ -134,6 +134,7 @@ public class PlayerInteraction : MonoBehaviour
             heldItem.transform.parent = itemGoal.transform; //remove the item from the player
             heldItem.transform.position = itemGoal.transform.position; //move the item to the position of the goal
             heldItem.transform.localPosition = heldItem.GetComponent<Item>().PlacedPosition; //move the heldItem to the local position of the goal
+            heldItem.transform.localRotation = Quaternion.Euler(heldItem.GetComponent<Item>().PlaceRotation); //rotate the item to the rotation of the goal
             if (item.TryGetComponent<BoxCollider>(out var rb)) //if the item has a rigidbody
             {
                 Destroy(rb); //destroy the rigidbody

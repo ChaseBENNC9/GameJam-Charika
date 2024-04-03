@@ -22,6 +22,11 @@ public class Item : MonoBehaviour
         get => placedScale;
     } //Creates a get for the placed scale so other scripts can read its value
 
+    [SerializeField] private Vector3 placeRotation; //this is the rotation that the object should be when it is placed in the world
+    public Vector3 PlaceRotation
+    {
+        get => placeRotation;
+    } //Creates a get for the placed rotation so other scripts can read its value
     [SerializeField] private Vector3 placedPosition = Vector3.zero; //this is the position that the object should be when it is placed in the world relative to its goal parent
     public Vector3 HeldScale
     {
