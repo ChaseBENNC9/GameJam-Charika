@@ -46,9 +46,9 @@ public class ItemGoal : MonoBehaviour
         hint.SetActive(show);
     }
 
-    public void GoalActionDrainWater() //This method will be run by the goal action when the goal is completed if it is set in the inspector
+    public void GoalActionChildBall() //This method will be run by the goal action when the goal is completed if it is set in the inspector
     {
-
+        hintNoItem = "";
     }
 
     public void GoalActionOpenDoor()
