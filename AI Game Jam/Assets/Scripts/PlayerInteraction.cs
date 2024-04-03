@@ -12,7 +12,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     private bool inRange,
         inRangeGoal;
-    public GameObject item;
+    [HideInInspector] public GameObject item;
     public GameObject heldItem;
     private Vector3 itemScale;
     public GameObject itemGoal;
