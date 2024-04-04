@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimateObject : MonoBehaviour
 {
-    private bool startAnimation = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +34,16 @@ public class AnimateObject : MonoBehaviour
     public void OpenDoor()
     {
 
-        if (transform.rotation.y < 65)
+        while (transform.localRotation.y < 65)
         {
-            print("this should say true once");
-                transform.rotation = Quaternion.Euler(
-                transform.position.x,
-                transform.position.y + 0.5f,
-                transform.position.z
+            print(transform.localRotation.y);
+                transform.localRotation = Quaternion.Euler(
+                0,
+                 0.1f,
+                0
             );
             StartCoroutine(Delay(1));
+            print(transform.localRotation.y);
         }
 
     }

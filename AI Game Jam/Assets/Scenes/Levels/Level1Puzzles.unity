@@ -5166,7 +5166,7 @@ Transform:
   m_GameObject: {fileID: 115401944}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 130.28008, y: -15.26, z: 10.136047}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.59999985, y: 0.59999996, z: 0.59999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16609,6 +16609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360754218}
   - component: {fileID: 360754219}
+  - component: {fileID: 360754220}
   m_Layer: 0
   m_Name: StudyGoal
   m_TagString: ItemGoal
@@ -16666,6 +16667,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &360754220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360754217}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.1818023, y: 2.5860405, z: 12.091035}
+  m_Center: {x: 2.5909033, y: -0.033914566, z: 0.24374744}
 --- !u!1001 &364582594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52739,7 +52761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200612644}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.10000397, y: 0, z: 2.200003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
