@@ -31,22 +31,25 @@ public class AnimateObject : MonoBehaviour
         }
 
     }
-    public void OpenDoor()
-    {
+    // public void OpenDoor()
+    // {
 
-        while (transform.localRotation.y < 65)
-        {
-            print(transform.localRotation.y);
-                transform.localRotation = Quaternion.Euler(
-                0,
-                 0.1f,
-                0
-            );
-            StartCoroutine(Delay(1));
-            print(transform.localRotation.y);
-        }
+    //     if (transform.localRotation.y < 65)
+    //     {
+    //         print(transform.localRotation.y);
+    //             transform.localRotation = Quaternion.Euler(
+    //             0,
+    //              transform.localRotation.y+ 20f,
+    //             0
+    //         );
+    //         StartCoroutine(Delay(1));
+    //         print(transform.localRotation.y);
+    //     }
+    //     {
+    //         print("exit");
+    //     }
 
-    }
+    // }
 
 
     private IEnumerator Delay(int seconds)
