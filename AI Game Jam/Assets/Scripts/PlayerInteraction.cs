@@ -126,8 +126,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void UseObjectAtGoal()
     {
-        if (Input.GetKeyDown(KeyCode.E) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
+        if (Input.GetKeyDown(KeyCode.E) && (itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem) || (item.GetComponent<ItemGoal>().IsComplex && item.GetComponent<ComplexGoal>().CanUseObject(heldItem) ) )) //if in range and clicks mouse button
         {
+
             heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
             heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
             heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
