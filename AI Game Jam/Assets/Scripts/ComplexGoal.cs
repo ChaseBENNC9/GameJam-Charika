@@ -19,7 +19,7 @@ public class ComplexGoal : ItemGoal
         items = new List<GameObject>();
     }
 
-    public new bool CanUseObject(GameObject item) 
+    public override bool CanUseObject(GameObject item) 
     {
         Item i = item.GetComponent<Item>();
 
@@ -48,7 +48,7 @@ public class ComplexGoal : ItemGoal
         }
     }
 
-    public new void UseObject(GameObject item = null) // This method will check if the goal has all of its required items and either run the goal action or add the held item to the list
+    public override void UseObject(GameObject item = null) // This method will check if the goal has all of its required items and either run the goal action or add the held item to the list
     {
         Debug.Log("Item used complex in " + gameObject.name);
         if (items.Count == itemsNeeded && item == null)  //if the goal has all of its required items and nothing was passed in for the item

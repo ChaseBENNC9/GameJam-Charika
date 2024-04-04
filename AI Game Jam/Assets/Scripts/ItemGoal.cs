@@ -27,13 +27,13 @@ public class ItemGoal : MonoBehaviour
         get => isComplex;
     } //Creates a get for the isComplex so other scripts can read its value
 
-    public bool CanUseObject(GameObject item)
+    public virtual bool CanUseObject(GameObject item)
     {
         ShowHint(true, hintAction);
         return true;
     }
 
-    public void UseObject(GameObject item)
+    public virtual void UseObject(GameObject item)
     {
         Debug.Log("Item used in " + gameObject.name);
 
