@@ -52,13 +52,13 @@ public class PlayerInteraction : MonoBehaviour
             if (item != null && item.GetComponent<Item>().Type.ToLower() == other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName.ToLower()) //if the item name is the same as the goal name
             {
                 other.gameObject.transform.parent
-                .GetComponent<ItemGoal>().ShowHint( true,other.gameObject.transform.parent
+                .GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent
                 .GetComponent<ItemGoal>().hintWithItem); //show the hint for the goal wnen the player has the item
             }
             else
             {
                 other.gameObject.transform.parent.GetComponent<ItemGoal>()
-                .GetComponent<ItemGoal>().ShowHint(true,other.gameObject.transform.parent
+                .GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent
                 .GetComponent<ItemGoal>().hintNoItem); //show the hint for the goal when the player does not have the item
             }
         }
@@ -110,7 +110,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (inRangeGoal) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
-                UseObjectAtGoal();
+                UseObjectAtGoal(itemGoal.GetComponent<ItemGoal>().IsComplex);
             }
             else
             {
@@ -124,35 +124,66 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void UseObjectAtGoal()
+    private void UseObjectAtGoal(bool complex)
     {
-        if (Input.GetKeyDown(KeyCode.E) && (itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem) || (item.GetComponent<ItemGoal>().IsComplex && item.GetComponent<ComplexGoal>().CanUseObject(heldItem) ) )) //if in range and clicks mouse button
+        if (complex)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && itemGoal.GetComponent<ComplexGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
+            {
+
+                heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
+                heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
+                heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
+                heldItem.transform.parent = itemGoal.transform; //remove the item from the player
+                heldItem.transform.position = itemGoal.transform.position; //move the item to the position of the goal
+                heldItem.transform.localPosition = heldItem.GetComponent<Item>().PlacedPosition; //move the heldItem to the local position of the goal
+                heldItem.transform.localRotation = Quaternion.Euler(heldItem.GetComponent<Item>().PlaceRotation); //rotate the item to the rotation of the goal
+                if (item.TryGetComponent<BoxCollider>(out var rb))
+                {
+                    Destroy(rb); //destroy the rigidbody
+                }
+
+                itemGoal.GetComponent<ComplexGoal>().UseObject(heldItem);
+
+
+                controller.radius = 0.5f;
+                heldItems--; //decrement held items
+                Debug.Log("Using itemxGOAL");
+                heldItem = null;
+                item = null;
+            }
+        }
+        else
         {
 
-            heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
-            heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
-            heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
-            heldItem.transform.parent = itemGoal.transform; //remove the item from the player
-            heldItem.transform.position = itemGoal.transform.position; //move the item to the position of the goal
-            heldItem.transform.localPosition = heldItem.GetComponent<Item>().PlacedPosition; //move the heldItem to the local position of the goal
-            heldItem.transform.localRotation = Quaternion.Euler(heldItem.GetComponent<Item>().PlaceRotation); //rotate the item to the rotation of the goal
-            if (item.TryGetComponent<BoxCollider>(out var rb)) 
+            if (Input.GetKeyDown(KeyCode.E) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
             {
-                Destroy(rb); //destroy the rigidbody
+
+                heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
+                heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
+                heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
+                heldItem.transform.parent = itemGoal.transform; //remove the item from the player
+                heldItem.transform.position = itemGoal.transform.position; //move the item to the position of the goal
+                heldItem.transform.localPosition = heldItem.GetComponent<Item>().PlacedPosition; //move the heldItem to the local position of the goal
+                heldItem.transform.localRotation = Quaternion.Euler(heldItem.GetComponent<Item>().PlaceRotation); //rotate the item to the rotation of the goal
+                if (item.TryGetComponent<BoxCollider>(out var rb))
+                {
+                    Destroy(rb); //destroy the rigidbody
+                }
+                if (itemGoal.GetComponent<ItemGoal>().IsComplex)
+                {
+                    itemGoal.GetComponent<ComplexGoal>().UseObject(heldItem);
+                }
+                else
+                {
+                    itemGoal.GetComponent<ItemGoal>().UseObject(heldItem);
+                }
+                controller.radius = 0.5f;
+                heldItems--; //decrement held items
+                Debug.Log("Using itemxGOAL");
+                heldItem = null;
+                item = null;
             }
-            if(itemGoal.GetComponent<ItemGoal>().IsComplex)
-            {
-                itemGoal.GetComponent<ComplexGoal>().UseObject(heldItem);
-            }
-            else
-            {
-                itemGoal.GetComponent<ItemGoal>().UseObject(heldItem);
-            }
-            controller.radius = 0.5f;
-            heldItems--; //decrement held items
-            Debug.Log("Using itemxGOAL");
-            heldItem = null;
-            item = null;
         }
     }
 
