@@ -15,27 +15,45 @@ public class AnimateObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startAnimation)
-        {
-            if (transform.position.y > -14)
-            {
-                transform.position = new Vector3(
-                    transform.position.x,
-                    transform.position.y - 0.1f,
-                    transform.position.z
-                );
-                StartCoroutine(MoveDownCoroutine());
-            }
-        }
+
     }
 
     public void MoveDown()
     {
-        startAnimation = true;
+
+        if (transform.position.y > -14)
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                transform.position.y - 0.1f,
+                transform.position.z
+            );
+            StartCoroutine(Delay(1));
+        }
+
+    }
+    public void OpenDoor()
+    {
+
+        if (transform.rotation.y < 65)
+        {
+            print("this should say true once");
+                transform.rotation = Quaternion.Euler(
+                transform.position.x,
+                transform.position.y + 0.5f,
+                transform.position.z
+            );
+            StartCoroutine(Delay(1));
+        }
+
     }
 
-    private IEnumerator MoveDownCoroutine()
+
+    private IEnumerator Delay(int seconds)
     {
         yield return new WaitForSeconds(1);
     }
 }
+
+
+
