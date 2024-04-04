@@ -6,18 +6,27 @@
 */
 
 
+using System;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    private bool inRange,
-        inRangeGoal;
-    public GameObject item;
-    public GameObject heldItem;
-    public GameObject itemGoal;
+    private const string ITEM_TAG = "Item";
+    private const string ITEM_GOAL_TAG = "ItemGoal";
+    private const string HINT_COLLIDER_TAG = "hintCollider";
+    private const KeyCode KEY_DROP = KeyCode.Mouse1;
+    private const KeyCode KEY_PICKUP = KeyCode.Mouse0;
+    private const KeyCode KEY_USE = KeyCode.E;
+    private const int MAX_ITEMS = 1;
+
+
+    private bool inRange;
+    private bool inRangeGoal;
+    [HideInInspector] public GameObject item;
+    [HideInInspector] public GameObject heldItem;
+    [HideInInspector] public GameObject itemGoal;
     private CharacterController controller; //Character controller component
     public int heldItems;
-    private const int MAXITEMS = 1;
 
     // Update is called once per frame
     void Start()
@@ -29,58 +38,50 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         PickUp();
-
         UseObject();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Item") //if the collided object is an item
+        if (other.CompareTag(ITEM_TAG) && other.gameObject != heldItem)
         {
-            if(other.gameObject != heldItem) //Make sure it is not the item you are holding
-            {
-            inRange = true; //set inRange to true
-            item = other.gameObject; //assign the item as the item for pickup
-            }
-
+            inRange = true;
+            item = other.gameObject;
         }
-        else if (other.gameObject.tag == "ItemGoal") //if the collided object is a goal
+        else if (other.CompareTag(ITEM_GOAL_TAG))
         {
-            inRangeGoal = true; //set inRangeGoal to true
-            itemGoal = other.gameObject; //assign the itemGoal as the goal for the item
-            ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>(); //get the itemGoal component
+            inRangeGoal = true;
+            itemGoal = other.gameObject;
+            ItemGoal currentGoal = itemGoal.GetComponent<ItemGoal>();
         }
-        else if (other.gameObject.tag == "hintCollider")
+        else if (other.CompareTag(HINT_COLLIDER_TAG))
         {
-            if (heldItem != null && heldItem.GetComponent<Item>().Type.ToLower() == other.gameObject.transform.parent.GetComponent<ItemGoal>().itemName.ToLower()) //if the item name is the same as the goal name
+            ItemGoal goal = other.gameObject.transform.parent.GetComponent<ItemGoal>();
+            if (heldItem != null && string.Equals(heldItem.GetComponent<Item>().Type, goal.itemName, StringComparison.OrdinalIgnoreCase))
             {
-                other.gameObject.transform.parent
-                .GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent
-                .GetComponent<ItemGoal>().hintWithItem); //show the hint for the goal wnen the player has the item
+                goal.ShowHint(true, goal.hintWithItem);
             }
             else
             {
-                other.gameObject.transform.parent.GetComponent<ItemGoal>()
-                .GetComponent<ItemGoal>().ShowHint(true, other.gameObject.transform.parent
-                .GetComponent<ItemGoal>().hintNoItem); //sdhow the hint for the goal when the player does not have the item
+                goal.ShowHint(true, goal.hintNoItem);
             }
         }
     }
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.tag == "Item")
+        if (collider.CompareTag(ITEM_TAG))
         {
             inRange = false;
             item = null;
         }
-        else if (collider.gameObject.tag == "ItemGoal")
+        else if (collider.CompareTag(ITEM_GOAL_TAG))
         {
             inRangeGoal = false;
             itemGoal = null;
             //  itemGoal.GetComponent<ItemGoal>().ShowHint(false);
         }
-        if (collider.gameObject.tag == "hintCollider")
+        if (collider.CompareTag(HINT_COLLIDER_TAG))
         {
             collider.gameObject.transform.parent.GetComponent<ItemGoal>().ShowHint(false);
         }
@@ -89,7 +90,7 @@ public class PlayerInteraction : MonoBehaviour
     private void PickUp()
     {
         //happens only once/when key press
-        if (inRange && Input.GetKeyDown(KeyCode.Mouse0) && heldItems < MAXITEMS && item != null) //if in range and clicks mouse button and not currently holding anything
+        if (inRange && Input.GetKeyDown(KEY_PICKUP) && heldItems < MAX_ITEMS && item != null) //if in range and clicks mouse button and not currently holding anything
         {
             heldItem = item; //assign the heldItem as the item
             item = null; //Clears the value of item
@@ -97,7 +98,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 Destroy(rb); //destroy the rigidbody
             }
-      
+
 
             heldItem.transform.parent = gameObject.transform; //stick to players position
             heldItem.transform.localRotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
@@ -122,8 +123,7 @@ public class PlayerInteraction : MonoBehaviour
                 DropObject();
             }
         }
-        else if (heldItems == 0 && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KeyCode.E)
-        )
+        else if (heldItems == 0 && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KEY_USE))
         {
             itemGoal.GetComponent<ComplexGoal>().UseObject();
         }
@@ -131,8 +131,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void UseObjectAtGoal()
     {
-
-        if (Input.GetKeyDown(KeyCode.E) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
+        if (Input.GetKeyDown(KEY_USE) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
         {
 
             heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
@@ -155,13 +154,11 @@ public class PlayerInteraction : MonoBehaviour
             heldItem = null;
             item = null;
         }
-
-
     }
 
     private void DropObject()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1)) //if in range and clicks mouse button
+        if (Input.GetKeyDown(KEY_DROP)) //if in range and clicks mouse button
         {
             Rigidbody rb = heldItem.AddComponent<Rigidbody>(); //add a rigidbody to the item
             rb.constraints =
@@ -174,7 +171,6 @@ public class PlayerInteraction : MonoBehaviour
             heldItem.transform.position = gameObject.transform.position + transform.forward * 2.5f; //move the item to the players forward position
             controller.radius = 0.5f;
             heldItems--; //decrement held items
-            Debug.Log("Using itemxDROP");
             heldItem = null;
             item = null;
         }

@@ -14,14 +14,14 @@ public class ItemGoal : MonoBehaviour
 {
     public string itemName; //what item can be placed here
     public GameObject hint; //the item that can be placed here
-    public string hintNoItem = ""; //initalizes the hints as empty
+    public string hintNoItem = ""; //initializes the hints as empty
     public string hintWithItem = "";
     public string hintAction = "";
 
     [SerializeField]
     protected UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met protected so it can be accessed by child classes
 
-    [SerializeField] protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
+  protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
     public bool IsComplex
     {
         get => isComplex;
@@ -40,15 +40,15 @@ public class ItemGoal : MonoBehaviour
         goalAction.Invoke(); //Calls the action for the goal
     }
 
-    public void ShowHint(bool show, string hintstring = "")
+    public void ShowHint(bool show, string hintString = "")
     {
-        hint.GetComponent<TMP_Text>().text = hintstring;
+        hint.GetComponent<TMP_Text>().text = hintString;
         hint.SetActive(show);
     }
 
     public void GoalActionChildBall() //This method will be run by the goal action when the goal is completed if it is set in the inspector
     {
-        hintNoItem = "";
+        hintNoItem = "What?";
     }
 
     public void GoalActionOpenDoor()
