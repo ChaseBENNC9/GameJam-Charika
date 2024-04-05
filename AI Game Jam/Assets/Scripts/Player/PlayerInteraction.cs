@@ -123,7 +123,7 @@ public class PlayerInteraction : MonoBehaviour
                 DropObject();
             }
         }
-        else if (heldItems == 0 && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KEY_USE))
+        else if ((heldItems == 0 || (heldItems > 0 && heldItem.name != itemGoal.GetComponent<ItemGoal>().itemName)) && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KEY_USE))
         {
             itemGoal.GetComponent<ComplexGoal>().UseObject();
         }
