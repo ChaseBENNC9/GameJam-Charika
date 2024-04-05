@@ -50,6 +50,7 @@ public class ComplexGoal : ItemGoal
 
     public override void UseObject(GameObject item = null) // This method will check if the goal has all of its required items and either run the goal action or add the held item to the list
     {
+        //TODO: Make a check so the goal can only be completed once
         Debug.Log("Item used complex in " + gameObject.name);
         if (items.Count == itemsNeeded && item == null)  //if the goal has all of its required items and nothing was passed in for the item
         {
