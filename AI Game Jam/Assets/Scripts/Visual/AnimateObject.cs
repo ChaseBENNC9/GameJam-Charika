@@ -29,7 +29,7 @@ public class AnimateObject : MonoBehaviour
             switch (animationType)
             {
                 case AnimationType.Move:
-                    StartCoroutine(InterpolatePosition(transform.position, target, duration));
+                    StartCoroutine(InterpolatePosition(transform.position, transform.position+target, duration));
                     break;
                 case AnimationType.Rotate:
                     StartCoroutine(
@@ -57,7 +57,7 @@ public class AnimateObject : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            transform.position = Vector3.Lerp(
+            transform.localPosition = Vector3.Lerp(
                 startPosition,
                 targetPosition,
                 elapsedTime / duration
@@ -66,7 +66,7 @@ public class AnimateObject : MonoBehaviour
             yield return null;
         }
 
-        transform.position = targetPosition;
+        transform.localPosition = targetPosition;
         print("exit");
         isAnimating = false;
     }
