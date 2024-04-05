@@ -16657,8 +16657,20 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1200612647}
         m_TargetAssemblyTypeName: AnimateObject, Assembly-CSharp
-        m_MethodName: OpenDoor
+        m_MethodName: StartAnimation
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 682664505}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25638,15 +25650,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -92.8
+      value: 41.81
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 14.88
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.899998
+      value: -10.84
       objectReference: {fileID: 0}
     - target: {fileID: 7333870619983728289, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30417,6 +30429,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &682664505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3082000807855717626, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
+  m_PrefabInstance: {fileID: 1167759326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &685292159
 GameObject:
   m_ObjectHideFlags: 0
@@ -51269,6 +51286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f191d658e7a821469e42697a489b764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimating: 0
+  animationType: 0
+  target: {x: 0, y: -14, z: 0}
+  duration: 5
 --- !u!1 &1163781341
 GameObject:
   m_ObjectHideFlags: 0
@@ -51329,7 +51350,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1160411987}
         m_TargetAssemblyTypeName: AnimateObject, Assembly-CSharp
-        m_MethodName: MoveDown
+        m_MethodName: StartAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -52781,6 +52802,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f191d658e7a821469e42697a489b764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimating: 0
+  animationType: 1
+  target: {x: 0, y: 65, z: 0}
+  duration: 2.5
 --- !u!1 &1202310700
 GameObject:
   m_ObjectHideFlags: 0
