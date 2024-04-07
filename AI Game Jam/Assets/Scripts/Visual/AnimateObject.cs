@@ -1,9 +1,16 @@
+/*
+* Description: This script is used to animate an object's position or rotation. The object will move or rotate to a target position or rotation over a specified duration.
+* Author: Chase Bennett-Hill
+* Last Modified: 8 / 04 / 24
+* Last Modified By: Chase Bennett-Hill
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum AnimationType
+public enum AnimationType //The type of animation that will be performed on the object
 {
     Move,
     Rotate
@@ -11,8 +18,8 @@ public enum AnimationType
 
 public class AnimateObject : MonoBehaviour
 {
-    public bool isAnimating = false;
-    public AnimationType animationType;
+    public bool isAnimating = false; //This is used to determine if the object is currently animating
+    public AnimationType animationType; //This is the type of animation that will be performed on the object
     public Vector3 target; //This is the target position or rotation relative to the object's current position or rotation
     public float duration; //The time it takes to complete the animation
 
@@ -26,7 +33,7 @@ public class AnimateObject : MonoBehaviour
     {
         if (isAnimating)
         {
-            switch (animationType)
+            switch (animationType) //Determine the type of animation that will be performed on the object based on the animationType variable
             {
                 case AnimationType.Move:
                     StartCoroutine(InterpolatePosition(transform.position, transform.position+target, duration));
@@ -40,7 +47,7 @@ public class AnimateObject : MonoBehaviour
                         )
                     );
                     break;
-                default:
+                default: //If an invalid animation type was selected, print an error message
                     Debug.Log("Error: Invalid animation type was selected");
                     break;
             }
