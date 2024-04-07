@@ -10,11 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum AnimationType //The type of animation that will be performed on the object
-{
-    Move,
-    Rotate
-}
+
 
 public class AnimateObject : MonoBehaviour
 {
@@ -54,41 +50,44 @@ public class AnimateObject : MonoBehaviour
         }
     }
 
-    private IEnumerator InterpolatePosition(
-        Vector3 startPosition,
-        Vector3 targetPosition,
+    private IEnumerator InterpolatePosition( //This function is used to interpolate the object's position
+        Vector3 startPosition, //The object's starting position
+        Vector3 targetPosition, //The object's target position
         float duration
     )
     {
-        float elapsedTime = 0;
+        float elapsedTime = 0; //The time that has elapsed since the animation started
 
         while (elapsedTime < duration)
-        {
+        { 
+            //Interpolate the object's position from the starting position to the target position
             transform.localPosition = Vector3.Lerp(
                 startPosition,
                 targetPosition,
                 elapsedTime / duration
             );
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime; //Increment the elapsed time 
             yield return null;
         }
 
-        transform.localPosition = targetPosition;
-        print("exit");
+        transform.localPosition = targetPosition; 
+        print("exit"); 
+         //Set isAnimating to false to prevent the object from animating again
         isAnimating = false;
     }
 
     private IEnumerator InterpolateRotation(
-        Quaternion startRotation,
-        Quaternion targetRotation,
+        Quaternion startRotation,  //The object's starting rotation
+        Quaternion targetRotation, //The object's target rotation
         float duration
     )
     {
-        float elapsedTime = 0;
+        float elapsedTime = 0; //The time that has elapsed since the animation started
 
         while (elapsedTime < duration)
         {
-            transform.localRotation = Quaternion.Lerp(
+            //Interpolate the object's rotation from the starting rotation to the target rotation
+            transform.localRotation = Quaternion.Lerp( 
                 startRotation,
                 targetRotation,
                 elapsedTime / duration
@@ -99,6 +98,7 @@ public class AnimateObject : MonoBehaviour
 
         transform.localRotation = targetRotation;
         print("exit");
-        isAnimating = false;
+        //Set isAnimating to false to prevent the object from animating again
+        isAnimating = false; 
     }
 }
