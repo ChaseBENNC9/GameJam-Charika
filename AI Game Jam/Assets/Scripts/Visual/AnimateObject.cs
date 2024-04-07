@@ -16,6 +16,7 @@ public class AnimateObject : MonoBehaviour
     public Vector3 target; //This is the target position or rotation relative to the object's current position or rotation
     public float duration; //The time it takes to complete the animation
 
+    void Start() => StartAnimation();
     public void StartAnimation()
     {
         isAnimating = true;
