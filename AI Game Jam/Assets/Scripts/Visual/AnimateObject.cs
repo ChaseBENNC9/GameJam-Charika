@@ -5,15 +5,15 @@
 * Last Modified By: Chase Bennett-Hill
 */
 
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 
 
 public class AnimateObject : MonoBehaviour
 {
+
     public bool isAnimating = false; //This is used to determine if the object is currently animating
     public AnimationType animationType; //This is the type of animation that will be performed on the object
     public Vector3 target; //This is the target position or rotation relative to the object's current position or rotation
@@ -71,7 +71,7 @@ public class AnimateObject : MonoBehaviour
         }
 
         transform.localPosition = targetPosition; 
-        print("exit"); 
+        Debug.Log("exit"); 
          //Set isAnimating to false to prevent the object from animating again
         isAnimating = false;
     }
@@ -97,8 +97,14 @@ public class AnimateObject : MonoBehaviour
         }
 
         transform.localRotation = targetRotation;
-        print("exit");
+        Debug.Log("exit");
         //Set isAnimating to false to prevent the object from animating again
         isAnimating = false; 
     }
+
+
+
+
+
+
 }
