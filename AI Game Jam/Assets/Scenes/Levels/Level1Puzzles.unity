@@ -51819,7 +51819,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f191d658e7a821469e42697a489b764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAnimating: 0
   animationType: 0
   target: {x: 0, y: -14, z: 0}
   duration: 5
@@ -53335,7 +53334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f191d658e7a821469e42697a489b764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAnimating: 0
   animationType: 1
   target: {x: 0, y: 65, z: 0}
   duration: 2.5
@@ -58723,7 +58721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f191d658e7a821469e42697a489b764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAnimating: 0
   animationType: 1
   target: {x: 170, y: 0, z: 0}
   duration: 3
