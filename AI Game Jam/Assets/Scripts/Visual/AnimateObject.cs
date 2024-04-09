@@ -9,15 +9,18 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-
-
 public class AnimateObject : MonoBehaviour
 {
+    private bool isAnimating = false; //This is used to determine if the object is currently animating
 
-    public bool isAnimating = false; //This is used to determine if the object is currently animating
-    public AnimationType animationType; //This is the type of animation that will be performed on the object
-    public Vector3 target; //This is the target position or rotation relative to the object's current position or rotation
-    public float duration; //The time it takes to complete the animation
+    [SerializeField]
+    private AnimationType animationType; //This is the type of animation that will be performed on the object
+
+    [SerializeField]
+    private Vector3 target; //This is the target position or rotation relative to the object's current position or rotation
+
+    [SerializeField]
+    private float duration; //The time it takes to complete the animation
 
     public void StartAnimation()
     {
@@ -32,7 +35,13 @@ public class AnimateObject : MonoBehaviour
             switch (animationType) //Determine the type of animation that will be performed on the object based on the animationType variable
             {
                 case AnimationType.Move:
-                    StartCoroutine(InterpolatePosition(transform.position, transform.position+target, duration));
+                    StartCoroutine(
+                        InterpolatePosition(
+                            transform.position,
+                            transform.position + target,
+                            duration
+                        )
+                    );
                     break;
                 case AnimationType.Rotate:
                     StartCoroutine(
@@ -59,25 +68,25 @@ public class AnimateObject : MonoBehaviour
         float elapsedTime = 0; //The time that has elapsed since the animation started
 
         while (elapsedTime < duration)
-        { 
+        {
             //Interpolate the object's position from the starting position to the target position
             transform.localPosition = Vector3.Lerp(
                 startPosition,
                 targetPosition,
                 elapsedTime / duration
             );
-            elapsedTime += Time.deltaTime; //Increment the elapsed time 
+            elapsedTime += Time.deltaTime; //Increment the elapsed time
             yield return null;
         }
 
-        transform.localPosition = targetPosition; 
-        Debug.Log("exit"); 
-         //Set isAnimating to false to prevent the object from animating again
+        transform.localPosition = targetPosition;
+        Debug.Log("exit");
+        //Set isAnimating to false to prevent the object from animating again
         isAnimating = false;
     }
 
     private IEnumerator InterpolateRotation(
-        Quaternion startRotation,  //The object's starting rotation
+        Quaternion startRotation, //The object's starting rotation
         Quaternion targetRotation, //The object's target rotation
         float duration
     )
@@ -87,7 +96,7 @@ public class AnimateObject : MonoBehaviour
         while (elapsedTime < duration)
         {
             //Interpolate the object's rotation from the starting rotation to the target rotation
-            transform.localRotation = Quaternion.Lerp( 
+            transform.localRotation = Quaternion.Lerp(
                 startRotation,
                 targetRotation,
                 elapsedTime / duration
@@ -99,12 +108,6 @@ public class AnimateObject : MonoBehaviour
         transform.localRotation = targetRotation;
         Debug.Log("exit");
         //Set isAnimating to false to prevent the object from animating again
-        isAnimating = false; 
+        isAnimating = false;
     }
-
-
-
-
-
-
 }
