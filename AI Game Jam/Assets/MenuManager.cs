@@ -7,13 +7,18 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private Button btnContinue;
 
+    [SerializeField] private Button btnReset;
+    [SerializeField] private GameObject TitleScreenParent;
+    [SerializeField] private GameObject OptionScreenParent;
+
     // Start is called before the first frame update
     void Start()
     {
-        btnContinue.interactable = PlayerPrefs.GetInt("Level") > 0;
+        //if the level is negative, the continue button is disabled
+        btnContinue.interactable = GameSettings.Level >= 0; 
+        btnReset.interactable = GameSettings.Level >= 0;
+        ShowTitle();
     }
-
-
     public void QuitGame()
     {
     
@@ -23,13 +28,13 @@ public class MenuManager : MonoBehaviour
     public void NewGame()
     {
         //Do Save Game Stuff
-        PlayerPrefs.SetInt("Level", 0);
+        GameSettings.Level = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Prologue");
     }
 
     public void LoadGame()
     {
-        switch(PlayerPrefs.GetInt("Level"))
+        switch(GameSettings.Level)
         {
             case 0:
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Prologue");
@@ -41,5 +46,21 @@ public class MenuManager : MonoBehaviour
                 Debug.LogError("No Level Found");
                 break;
         }
+    }
+
+    public void ResetGame()
+    {
+        GameSettings.Level = -1;
+    }
+
+    public void ShowOptions()
+    {
+        TitleScreenParent.gameObject.SetActive(false);
+        OptionScreenParent.gameObject.SetActive(true);
+    }
+    public void ShowTitle()
+    {
+        TitleScreenParent.gameObject.SetActive(true);
+        OptionScreenParent.gameObject.SetActive(false);
     }
 }
