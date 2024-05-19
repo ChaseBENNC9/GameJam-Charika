@@ -31,8 +31,7 @@ public class EscapePod : MonoBehaviour
     {
         if (inRange && Input.GetKeyDown(KeyCode.E))
         {
-            PlayerPrefs.SetInt("Level", 1);
-            PlayerPrefs.Save();
+            GameSettings.Level = 1;
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level 1");
         }
     }
