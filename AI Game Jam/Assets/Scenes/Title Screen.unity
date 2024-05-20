@@ -8304,7 +8304,7 @@ MonoBehaviour:
   titleScreenParent: {fileID: 1743130208}
   optionScreenParent: {fileID: 1924222779}
   levelSelectScreenParent: {fileID: 887084301}
-  tglFullscreen: {fileID: 0}
+  tglFullscreen: {fileID: 925262762}
   btnReset: {fileID: 1395021687}
   newGameModal: {fileID: 1462105465}
   btnPrologue: {fileID: 1015125767}
