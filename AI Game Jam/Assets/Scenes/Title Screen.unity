@@ -289,6 +289,7 @@ MonoBehaviour:
   btnReset: {fileID: 1395021687}
   TitleScreenParent: {fileID: 1743130208}
   OptionScreenParent: {fileID: 1924222779}
+  tglFullscreen: {fileID: 701366864}
 --- !u!4 &238609205
 Transform:
   m_ObjectHideFlags: 0
@@ -883,7 +884,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 238609204}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ToggleFullscreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &701366865
 MonoBehaviour:

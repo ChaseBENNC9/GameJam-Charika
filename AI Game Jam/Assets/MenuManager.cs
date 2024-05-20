@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject TitleScreenParent;
     [SerializeField] private GameObject OptionScreenParent;
 
+    [SerializeField] private Toggle tglFullscreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,5 +64,9 @@ public class MenuManager : MonoBehaviour
     {
         TitleScreenParent.gameObject.SetActive(true);
         OptionScreenParent.gameObject.SetActive(false);
+    }
+    public void ToggleFullscreen()
+    {
+        Screen.fullScreen = tglFullscreen.isOn;
     }
 }
