@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private Toggle tglFullscreen;
 
+    [SerializeField] private GameObject newGameModal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +31,16 @@ public class MenuManager : MonoBehaviour
 
     public void NewGame()
     {
-        //Do Save Game Stuff
+        if(GameSettings.Level >= 0)
+        {
+            newGameModal.SetActive(true);
+        }
+        else
+        {
+       
         GameSettings.Level = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Prologue");
+        }
     }
 
     public void LoadGame()
