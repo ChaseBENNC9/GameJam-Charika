@@ -36,16 +36,15 @@ public class CameraPosSnap : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         // Changes camera position when player enters or exits the house
-        if (other.gameObject.tag == "FirstFloor" && !isIndoors)
+        if (other.gameObject.tag == "FirstFloor")
         {
-            isIndoors = true;
             cam.transform.position = new Vector3(transform.position.x, 7.09f, -24.24f);
         }
-        else if (other.gameObject.tag == "FirstFloor" && isIndoors)
-        {
-            isIndoors = false;
-            cam.transform.position = new Vector3(transform.position.x, 6.7f, -21.1f);
-        }
+        // else if (other.gameObject.tag == "FirstFloor" && isIndoors)
+        // {
+        //     isIndoors = false;
+        //     cam.transform.position = new Vector3(transform.position.x, 6.7f, -21.1f);
+        // }
         
         // Changes camera position when player is in the second floor hallway
         if (other.gameObject.tag == "SecondFloor")
@@ -53,9 +52,8 @@ public class CameraPosSnap : MonoBehaviour
             cam.transform.position = new Vector3(transform.position.x, 17.47f, -24.24f);
         }
 
-        if (other.gameObject.name == "Camera Bedroom" && !inBedroom)
+        if (other.gameObject.name == "Camera Bedroom")
         {
-            inBedroom = true;
             cam.transform.position = new Vector3(transform.position.x, 17.47f, 2.85f);
             for (int i = 0; i < library.Count; i++)
             {
@@ -94,6 +92,11 @@ public class CameraPosSnap : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.tag == "FirstFloor")
+        {
+            cam.transform.position = new Vector3(transform.position.x, 6.7f, -21.1f);
+        }
+
         if (other.gameObject.tag == "SecondFloor")
         {
             for (int i = 0; i < hideObjects.Count; i++)
@@ -108,11 +111,10 @@ public class CameraPosSnap : MonoBehaviour
                 exceptionWalls[i].GetComponent<MeshRenderer>().enabled = true;
             }
         }
-        
+
         // Changes camera position when player is in the bedroom
-        else if (other.gameObject.name == "Camera Bedroom" && inBedroom)
+        else if (other.gameObject.name == "Camera Bedroom")
         {
-            inBedroom = false;
             cam.transform.position = new Vector3(transform.position.x, 17.47f, -24.24f);
             for (int i = 0; i < library.Count; i++)
             {
