@@ -41,7 +41,7 @@ public class CameraPosSnap : MonoBehaviour
         else if (other.gameObject.tag == "FirstFloor" && isIndoors)
         {
             isIndoors = false;
-            cam.transform.position = new Vector3(transform.position.x, 5.7f, -29.1f);
+            cam.transform.position = new Vector3(transform.position.x, 6.7f, -21.1f);
             Debug.Log("Outdoors");
         }
     }
