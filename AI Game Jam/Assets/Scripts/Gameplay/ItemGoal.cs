@@ -21,7 +21,7 @@ public class ItemGoal : MonoBehaviour
     [SerializeField]
     protected UnityEvent goalAction; //the action will be called when the goal is interacted with and its requirements are met protected so it can be accessed by child classes
 
-  protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
+    protected bool isComplex; //if the hint should be shown protected so it can be accessed by child classes
     public bool IsComplex
     {
         get => isComplex;
@@ -29,8 +29,16 @@ public class ItemGoal : MonoBehaviour
 
     public virtual bool CanUseObject(GameObject item)
     {
-        ShowHint(true, hintAction);
-        return true;
+        if (item.GetComponent<Item>().Type.ToLower() == itemName.ToLower()) //if the item is the correct type
+        {
+            ShowHint(true, hintAction);
+            return true;
+        }
+        else
+        {
+            ShowHint(true, hintNoItem);
+            return false;
+        }
     }
 
     public virtual void UseObject(GameObject item)
@@ -48,12 +56,11 @@ public class ItemGoal : MonoBehaviour
 
     public void GoalActionChildBall() //This method will be run by the goal action when the goal is completed if it is set in the inspector
     {
-        hintNoItem = "What?";
+        hintNoItem = "Thank you for finding my ball!";
     }
 
     public void GoalActionOpenDoor()
     {
-
         Destroy(gameObject);
     }
 }
