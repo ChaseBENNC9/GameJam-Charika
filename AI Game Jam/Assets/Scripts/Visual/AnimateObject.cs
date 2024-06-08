@@ -52,6 +52,15 @@ public class AnimateObject : MonoBehaviour
                         )
                     );
                     break;
+                case AnimationType.Scale:
+                    StartCoroutine(
+                        InterpolateScale(
+                            transform.localScale,
+                            target,
+                            duration
+                        )
+                    );
+                    break;
                 default: //If an invalid animation type was selected, print an error message
                     Debug.Log("Error: Invalid animation type was selected");
                     break;
@@ -106,6 +115,34 @@ public class AnimateObject : MonoBehaviour
         }
 
         transform.localRotation = targetRotation;
+        Debug.Log("exit");
+        //Set isAnimating to false to prevent the object from animating again
+        isAnimating = false;
+    }
+
+
+
+    private IEnumerator InterpolateScale(
+        Vector3 startScale, 
+        Vector3 targetScale, 
+        float duration
+    )
+    {
+        float elapsedTime = 0; //The time that has elapsed since the animation started
+
+        while (elapsedTime < duration)
+        {
+            //Interpolate the object's rotation from the starting rotation to the target rotation
+            transform.localScale = Vector3.Lerp(
+                startScale,
+                targetScale,
+                elapsedTime / duration
+            );
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
         Debug.Log("exit");
         //Set isAnimating to false to prevent the object from animating again
         isAnimating = false;

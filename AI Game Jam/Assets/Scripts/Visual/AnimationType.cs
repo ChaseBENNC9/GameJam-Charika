@@ -9,5 +9,6 @@
 public enum AnimationType
 {
     Move, //The object will move to a target position
-    Rotate //The object will rotate to a target rotation
+    Rotate, //The object will rotate to a target rotation
+    Scale //The object will scale to a target scale
 }
