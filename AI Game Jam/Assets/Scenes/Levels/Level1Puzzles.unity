@@ -85858,7 +85858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationType: 2
-  target: {x: 30, y: 0, z: 22}
+  target: {x: 30, y: 0.05, z: 22}
   duration: 3
 --- !u!1 &1945100358
 GameObject:
