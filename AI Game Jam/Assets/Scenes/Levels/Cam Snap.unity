@@ -9418,6 +9418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1331034027}
   hideObjects: []
+  exceptionWall: {fileID: 0}
 --- !u!4 &193505115
 Transform:
   m_ObjectHideFlags: 0
@@ -24503,7 +24504,7 @@ GameObject:
   - component: {fileID: 537346574}
   m_Layer: 0
   m_Name: Camera Hallway
-  m_TagString: CameraSnap
+  m_TagString: SecondFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24527,7 +24528,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 5, z: 22}
+  m_Size: {x: 12, y: 5, z: 23}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &537346575
 Transform:
@@ -24538,7 +24539,7 @@ Transform:
   m_GameObject: {fileID: 537346573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.06, y: 15.66, z: 13.96}
+  m_LocalPosition: {x: 32.28, y: 15.66, z: 14.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -88609,11 +88610,12 @@ MonoBehaviour:
   cam: {fileID: 1331034027}
   hideObjects:
   - {fileID: 1481734046}
-  - {fileID: 1740437369}
   - {fileID: 1279321106}
   - {fileID: 532126413}
   - {fileID: 1908196444}
   - {fileID: 1091460510}
+  - {fileID: 1740437369}
+  exceptionWall: {fileID: 1908196444}
 --- !u!1 &1968808587
 GameObject:
   m_ObjectHideFlags: 0

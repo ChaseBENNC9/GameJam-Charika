@@ -15,6 +15,7 @@ public class CameraPosSnap : MonoBehaviour
     private bool isIndoors;
     private bool hideWalls;
     [SerializeField] private List<GameObject> hideObjects = new List<GameObject>();
+    [SerializeField] private GameObject exceptionWall;
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +51,18 @@ public class CameraPosSnap : MonoBehaviour
             Debug.Log("Second Floor");
         }
 
-        // Hides walls when camera is in the hallway or stairs
-        if (other.gameObject.name == "Camera Stairs" && !hideWalls || other.gameObject.name == "Camera Hallway" && !hideWalls)
+        
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "Camera Stairs")
+        {
+            cam.transform.position = new Vector3(transform.position.x, this.transform.position.y, -24.24f);
+
+        }
+
+        if (other.gameObject.tag == "SecondFloor")
         {
             for (int i = 0; i < hideObjects.Count; i++)
             {
@@ -60,9 +71,13 @@ public class CameraPosSnap : MonoBehaviour
                     child.GetComponent<MeshRenderer>().enabled = false;
                 }
             }
-            hideWalls = true;
+            exceptionWall.GetComponent<MeshRenderer>().enabled = false; 
         }
-        else if (other.gameObject.name == "Camera Stairs" && hideWalls || other.gameObject.name == "Camera Hallway" && hideWalls)
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "SecondFloor")
         {
             for (int i = 0; i < hideObjects.Count; i++)
             {
@@ -71,16 +86,7 @@ public class CameraPosSnap : MonoBehaviour
                     child.GetComponent<MeshRenderer>().enabled = true;
                 }
             }
-            hideWalls = false;
-        }
-    }
-
-    public void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.name == "Camera Stairs")
-        {
-            //cam.transform.position = new Vector3(transform.position.x, 17.47f, -24.24f);
-            cam.transform.position = new Vector3(transform.position.x, this.transform.position.y, -24.24f);
+            exceptionWall.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 }
