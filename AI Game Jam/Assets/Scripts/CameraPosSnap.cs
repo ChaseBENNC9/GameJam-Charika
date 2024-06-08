@@ -4,72 +4,53 @@ using UnityEngine;
 
 public class CameraPosSnap : MonoBehaviour
 {
-    // First Floor
-    // y = 7.09
-    // z = -24.24
-    // Second Floor
-    // y = 17.47
-    // z = -24.24
-    // Bedroom
-    // z = 2.85
-
+    // GameObjects
     [SerializeField] private GameObject cam;
-    private bool isIndoors;
-    private bool hideWalls;
-    private bool inBedroom;
     [SerializeField] private List<GameObject> hideObjects = new List<GameObject>(); // walls that have children with mesh renderers
     [SerializeField] private List<GameObject> exceptionWalls = new List<GameObject>(); // walls that have a mesh renderer attached
     [SerializeField] private List<GameObject> library = new List<GameObject>();
+    
+    // Booleans
+    private bool hideWalls;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    // Consts
+    private const float FIRST_FLOOR_Y = 7.09f;
+    private const float FLOOR_Z = -24.24f;
+    private const float SECOND_FLOOR_Y = 17.47f;
+    private const float BEDROOM_Z = 2.85f;
+    private const float CELLAR_Z = -10f;
+    private const float OUTDOORS_Y = 6.7f;
+    private const float OUTDOORS_Z = -21.1f;
 
     public void OnTriggerEnter(Collider other)
     {
         // Changes camera position when player enters or exits the house
         if (other.gameObject.tag == "FirstFloor")
         {
-            cam.transform.position = new Vector3(transform.position.x, 7.09f, -24.24f);
+            cam.transform.position = new Vector3(transform.position.x, FIRST_FLOOR_Y, FLOOR_Z);
         }
-        // else if (other.gameObject.tag == "FirstFloor" && isIndoors)
-        // {
-        //     isIndoors = false;
-        //     cam.transform.position = new Vector3(transform.position.x, 6.7f, -21.1f);
-        // }
         
         // Changes camera position when player is in the second floor hallway
         if (other.gameObject.tag == "SecondFloor")
         {
-            cam.transform.position = new Vector3(transform.position.x, 17.47f, -24.24f);
+            cam.transform.position = new Vector3(transform.position.x, SECOND_FLOOR_Y, FLOOR_Z);
         }
 
         if (other.gameObject.name == "Camera Bedroom")
         {
-            cam.transform.position = new Vector3(transform.position.x, 17.47f, 2.85f);
+            cam.transform.position = new Vector3(transform.position.x, SECOND_FLOOR_Y, BEDROOM_Z);
             for (int i = 0; i < library.Count; i++)
             {
                 library[i].SetActive(false);
             }
-        }
-
-        
+        }        
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.name == "Camera Stairs")
+        if (other.gameObject.name == "Camera Stairs" || other.gameObject.name == "Cellar Stairs")
         {
-            cam.transform.position = new Vector3(transform.position.x, this.transform.position.y, -24.24f);
-
+            cam.transform.position = new Vector3(transform.position.x, this.transform.position.y, CELLAR_Z);
         }
 
         // Hides walls when player is in the second floor hallway
@@ -87,14 +68,13 @@ public class CameraPosSnap : MonoBehaviour
                 exceptionWalls[i].GetComponent<MeshRenderer>().enabled = false;
             }
         }
-
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "FirstFloor")
         {
-            cam.transform.position = new Vector3(transform.position.x, 6.7f, -21.1f);
+            cam.transform.position = new Vector3(transform.position.x, OUTDOORS_Y, OUTDOORS_Z);
         }
 
         if (other.gameObject.tag == "SecondFloor")
@@ -115,7 +95,7 @@ public class CameraPosSnap : MonoBehaviour
         // Changes camera position when player is in the bedroom
         else if (other.gameObject.name == "Camera Bedroom")
         {
-            cam.transform.position = new Vector3(transform.position.x, 17.47f, -24.24f);
+            cam.transform.position = new Vector3(transform.position.x, SECOND_FLOOR_Y, FLOOR_Z);
             for (int i = 0; i < library.Count; i++)
             {
                 library[i].SetActive(true);
