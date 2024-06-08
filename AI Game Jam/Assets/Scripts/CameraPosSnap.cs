@@ -14,8 +14,8 @@ public class CameraPosSnap : MonoBehaviour
     [SerializeField] private GameObject cam;
     private bool isIndoors;
     private bool hideWalls;
-    [SerializeField] private List<GameObject> hideObjects = new List<GameObject>();
-    [SerializeField] private GameObject exceptionWall;
+    [SerializeField] private List<GameObject> hideObjects = new List<GameObject>(); // walls that have children with mesh renderers
+    [SerializeField] private List<GameObject> exceptionWalls = new List<GameObject>(); // walls that have a mesh renderer attached
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +71,10 @@ public class CameraPosSnap : MonoBehaviour
                     child.GetComponent<MeshRenderer>().enabled = false;
                 }
             }
-            exceptionWall.GetComponent<MeshRenderer>().enabled = false; 
+            for (int i = 0; i < exceptionWalls.Count; i++)
+            {
+                exceptionWalls[i].GetComponent<MeshRenderer>().enabled = false;
+            }
         }
     }
 
@@ -86,7 +89,10 @@ public class CameraPosSnap : MonoBehaviour
                     child.GetComponent<MeshRenderer>().enabled = true;
                 }
             }
-            exceptionWall.GetComponent<MeshRenderer>().enabled = true;
+            for (int i = 0; i < exceptionWalls.Count; i++)
+            {
+                exceptionWalls[i].GetComponent<MeshRenderer>().enabled = true;
+            }
         }
     }
 }
