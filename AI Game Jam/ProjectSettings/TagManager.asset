@@ -8,6 +8,10 @@ TagManager:
   - ItemGoal
   - hintCollider
   - checkpoint
+  - CameraSnap
+  - SecondFloor
+  - FirstFloor
+  - HideObjects
   layers:
   - Default
   - TransparentFX
