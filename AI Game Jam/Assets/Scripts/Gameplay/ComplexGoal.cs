@@ -58,7 +58,7 @@ public class ComplexGoal : ItemGoal
             print("Goal completed");
         }
 
-        else
+        else if(item != null)
         {
             print("Item added to list");
             items.Add(item); //add the item to the list
