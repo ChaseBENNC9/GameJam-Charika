@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class LevelManager : MonoBehaviour
     private GameObject playerprefab; //the player prefab used to respawn the player
     public static LevelManager instance; //creates an instance of the level manager so that it can be accessed from other scripts
     private const float PLAYERY = 1.08f; // the y value of the player object
+
+    public TextMeshProUGUI hintTitle;
+    public TextMeshProUGUI hintContent;
+
+    public TextMeshProUGUI holdingText;
 
     // Start is called before the first frame update
 
@@ -34,7 +40,10 @@ public class LevelManager : MonoBehaviour
         }
         if (activeCheckpoint == null) //if there is no active checkpoint, the active checkpoint is set to the level start
         {
-            activeCheckpoint = GameObject.Find("LevelStart").GetComponent<Checkpoint>();
+            if (GameObject.Find("LevelStart") != null)
+            {
+                activeCheckpoint = GameObject.Find("LevelStart").GetComponent<Checkpoint>();
+            }
         }
     }
 

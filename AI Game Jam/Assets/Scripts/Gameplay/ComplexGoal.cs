@@ -62,6 +62,15 @@ public class ComplexGoal : ItemGoal
         {
             print("Item added to list");
             items.Add(item); //add the item to the list
+            hintNoItem = items.Count > 1 ? (itemsNeeded - items.Count) + " Items remaining"  : "1 item remaining";
+            if (items.Count == itemsNeeded)
+            {
+                ShowHint(true, hintAction);
+            }
+            else
+            {
+                ShowHint(false);
+            }
         }
     }
 }

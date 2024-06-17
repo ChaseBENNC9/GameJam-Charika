@@ -23,13 +23,10 @@ public class PlayerInteraction : MonoBehaviour
 
     private bool inRange;
     private bool inRangeGoal;
-   private GameObject closestItem;
+    private GameObject closestItem;
     [HideInInspector] public GameObject heldItem;
     [HideInInspector] public GameObject itemGoal;
-    public TextMeshProUGUI hintTitle;
-    public TextMeshProUGUI hintContent;
 
-    public TextMeshProUGUI holdingText;
     private CharacterController controller; //Character controller component
     public int heldItems;
 
@@ -52,15 +49,15 @@ public class PlayerInteraction : MonoBehaviour
         {
             inRange = true;
             closestItem = other.gameObject;
-            if(!heldItem)
+            if (!heldItem)
             {
-                hintTitle.text = closestItem.gameObject.name;
-                hintContent.text = "Press Left Mouse Button to pick up";
+                LevelManager.instance.hintTitle.text = closestItem.gameObject.name;
+                LevelManager.instance.hintContent.text = "Press Left Mouse Button to pick up";
             }
             else
             {
-                hintTitle.text = closestItem.gameObject.name;
-                hintContent.text = "Already holding " + heldItem.gameObject.name;
+                LevelManager.instance.hintTitle.text = closestItem.gameObject.name;
+                LevelManager.instance.hintContent.text = "Already holding " + heldItem.gameObject.name;
             }
 
         }
@@ -73,7 +70,7 @@ public class PlayerInteraction : MonoBehaviour
         else if (other.CompareTag(HINT_COLLIDER_TAG))
         {
             ItemGoal goal = other.gameObject.transform.parent.GetComponent<ItemGoal>();
-            if (heldItem != null && string.Equals(heldItem.GetComponent<Item>().Type, goal.itemName, StringComparison.OrdinalIgnoreCase))
+            if (heldItem != null && heldItem.GetComponent<Item>().Type == goal.itemName)
             {
                 goal.ShowHint(true, goal.hintWithItem);
             }
@@ -81,6 +78,8 @@ public class PlayerInteraction : MonoBehaviour
             {
                 goal.ShowHint(true, goal.hintNoItem);
             }
+
+
         }
     }
 
@@ -88,12 +87,12 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collider.CompareTag(ITEM_TAG))
         {
-            hintTitle.text = "";
-            hintContent.text = "";
+            LevelManager.instance.hintTitle.text = "";
+            LevelManager.instance.hintContent.text = "";
             if (heldItem != null)
             {
-                hintTitle.text = heldItem.name;
-                hintContent.text = "Press Right Mouse Button to drop item";
+                LevelManager.instance.hintTitle.text = heldItem.name;
+                LevelManager.instance.hintContent.text = "Press Right Mouse Button to drop item";
             }
             inRange = false;
             closestItem = null;
@@ -107,6 +106,8 @@ public class PlayerInteraction : MonoBehaviour
         if (collider.CompareTag(HINT_COLLIDER_TAG))
         {
             collider.gameObject.transform.parent.GetComponent<ItemGoal>().ShowHint(false);
+            LevelManager.instance.hintContent.text = "";
+            LevelManager.instance.hintTitle.text = "";
         }
     }
 
@@ -117,9 +118,9 @@ public class PlayerInteraction : MonoBehaviour
         {
             heldItem = closestItem; //assign the heldItem as the item
             closestItem = null; //Clears the value of item
-            hintTitle.text = heldItem.name;
-            holdingText.text = heldItem.name;
-            hintContent.text = "Press Right Mouse Button to drop item";
+            LevelManager.instance.hintTitle.text = heldItem.name;
+            LevelManager.instance.holdingText.text = heldItem.name;
+            LevelManager.instance.hintContent.text = "Press Right Mouse Button to drop item";
             if (heldItem.TryGetComponent<Rigidbody>(out var rb)) //if the item has a rigidbody
             {
                 Destroy(rb); //destroy the rigidbody
@@ -140,19 +141,24 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (heldItems > 0 && heldItem != null)
         {
+
             if (inRangeGoal) //if in range of goal and clicks mouse button and holding an item with the correct name
             {
                 UseObjectAtGoal();
+
             }
             else
             {
                 DropObject();
             }
         }
+        
         else if ((heldItems == 0 || (heldItems > 0 && heldItem.name != itemGoal.GetComponent<ItemGoal>().itemName)) && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KEY_USE))
         {
             itemGoal.GetComponent<ComplexGoal>().UseObject();
+
         }
+        
     }
 
     private void UseObjectAtGoal()
@@ -160,8 +166,8 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KEY_USE) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
         {
 
-            hintTitle.text = "";
-            hintContent.text = "";
+            LevelManager.instance.hintTitle.text = "";
+            LevelManager.instance.hintContent.text = "";
             heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
             heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
             heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
@@ -175,7 +181,6 @@ public class PlayerInteraction : MonoBehaviour
             }
 
             itemGoal.GetComponent<ItemGoal>().UseObject(heldItem);
-
 
             controller.radius = 0.5f;
             heldItems--; //decrement held items
@@ -202,7 +207,7 @@ public class PlayerInteraction : MonoBehaviour
             heldItem = null;
             closestItem = null;
 
-            holdingText.text = "";
+            LevelManager.instance.holdingText.text = "";
         }
     }
 }
