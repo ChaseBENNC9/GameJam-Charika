@@ -51,7 +51,7 @@ public class ItemGoal : MonoBehaviour
     public void ShowHint(bool show, string hintString = "")
     {
         hint.GetComponent<TMP_Text>().text = hintString;
-        LevelManager.instance.hintTitle.text = itemName;
+        LevelManager.instance.hintTitle.text = gameObject.name;
         LevelManager.instance.hintContent.text = hintString;
         
         hint.SetActive(show);
