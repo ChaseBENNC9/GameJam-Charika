@@ -7,6 +7,7 @@
 
 
 using System;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -22,9 +23,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private bool inRange;
     private bool inRangeGoal;
-    [HideInInspector] public GameObject item;
+   private GameObject closestItem;
     [HideInInspector] public GameObject heldItem;
     [HideInInspector] public GameObject itemGoal;
+    public TextMeshProUGUI hintTitle;
+    public TextMeshProUGUI hintContent;
     private CharacterController controller; //Character controller component
     public int heldItems;
 
@@ -46,7 +49,18 @@ public class PlayerInteraction : MonoBehaviour
         if (other.CompareTag(ITEM_TAG) && other.gameObject != heldItem)
         {
             inRange = true;
-            item = other.gameObject;
+            closestItem = other.gameObject;
+            if(!heldItem)
+            {
+                hintTitle.text = closestItem.gameObject.name;
+                hintContent.text = "Press Left Mouse Button to pick up";
+            }
+            else
+            {
+                hintTitle.text = closestItem.gameObject.name;
+                hintContent.text = "Already holding " + heldItem.gameObject.name;
+            }
+
         }
         else if (other.CompareTag(ITEM_GOAL_TAG))
         {
@@ -72,8 +86,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collider.CompareTag(ITEM_TAG))
         {
+            hintTitle.text = "";
+            hintContent.text = "";
             inRange = false;
-            item = null;
+            closestItem = null;
         }
         else if (collider.CompareTag(ITEM_GOAL_TAG))
         {
@@ -90,10 +106,12 @@ public class PlayerInteraction : MonoBehaviour
     private void PickUp()
     {
         //happens only once/when key press
-        if (inRange && Input.GetKeyDown(KEY_PICKUP) && heldItems < MAX_ITEMS && item != null) //if in range and clicks mouse button and not currently holding anything
+        if (inRange && Input.GetKeyDown(KEY_PICKUP) && heldItems < MAX_ITEMS && closestItem != null) //if in range and clicks mouse button and not currently holding anything
         {
-            heldItem = item; //assign the heldItem as the item
-            item = null; //Clears the value of item
+            heldItem = closestItem; //assign the heldItem as the item
+            closestItem = null; //Clears the value of item
+            hintTitle.text = heldItem.gameObject.name;
+            hintContent.text = "Press Right Mouse Button to drop item";
             if (heldItem.TryGetComponent<Rigidbody>(out var rb)) //if the item has a rigidbody
             {
                 Destroy(rb); //destroy the rigidbody
@@ -134,6 +152,8 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KEY_USE) && itemGoal.GetComponent<ItemGoal>().CanUseObject(heldItem)) //if in range and clicks mouse button
         {
 
+            hintTitle.text = "";
+            hintContent.text = "";
             heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
             heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
             heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item
@@ -152,7 +172,7 @@ public class PlayerInteraction : MonoBehaviour
             controller.radius = 0.5f;
             heldItems--; //decrement held items
             heldItem = null;
-            item = null;
+            closestItem = null;
         }
     }
 
@@ -172,7 +192,7 @@ public class PlayerInteraction : MonoBehaviour
             controller.radius = 0.5f;
             heldItems--; //decrement held items
             heldItem = null;
-            item = null;
+            closestItem = null;
         }
     }
 }

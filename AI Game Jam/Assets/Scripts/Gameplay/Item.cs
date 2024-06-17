@@ -39,6 +39,7 @@ public class Item : MonoBehaviour
 
     public int priority = 0;  //this is the priority of the item in the list of items that are needed to complete the puzzle lower numbers are needed first
 
+
     void Start()
     {
         placedScale = transform.localScale;
