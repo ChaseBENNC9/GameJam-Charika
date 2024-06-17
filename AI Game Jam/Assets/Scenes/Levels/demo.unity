@@ -10107,7 +10107,7 @@ GameObject:
   - component: {fileID: 202710437}
   - component: {fileID: 202710436}
   m_Layer: 0
-  m_Name: StudyGoal
+  m_Name: The Study
   m_TagString: ItemGoal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55141,7 +55141,7 @@ GameObject:
   - component: {fileID: 1163781344}
   - component: {fileID: 1163781343}
   m_Layer: 0
-  m_Name: CellarGoal
+  m_Name: The Cellar
   m_TagString: ItemGoal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65252,7 +65252,7 @@ GameObject:
   - component: {fileID: 1464552728}
   - component: {fileID: 1464552727}
   m_Layer: 0
-  m_Name: MainDoorGoal
+  m_Name: The Exit
   m_TagString: ItemGoal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87615,7 +87615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3082000807855717626, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5753077924885856200, guid: 98003d1524db5864cb8b790efbb63028, type: 3}
       propertyPath: type
