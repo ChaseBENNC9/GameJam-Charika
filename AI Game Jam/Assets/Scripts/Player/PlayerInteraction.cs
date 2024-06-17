@@ -28,6 +28,8 @@ public class PlayerInteraction : MonoBehaviour
     [HideInInspector] public GameObject itemGoal;
     public TextMeshProUGUI hintTitle;
     public TextMeshProUGUI hintContent;
+
+    public TextMeshProUGUI holdingText;
     private CharacterController controller; //Character controller component
     public int heldItems;
 
@@ -88,6 +90,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             hintTitle.text = "";
             hintContent.text = "";
+            if (heldItem != null)
+            {
+                hintTitle.text = heldItem.name;
+                hintContent.text = "Press Right Mouse Button to drop item";
+            }
             inRange = false;
             closestItem = null;
         }
@@ -110,7 +117,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             heldItem = closestItem; //assign the heldItem as the item
             closestItem = null; //Clears the value of item
-            hintTitle.text = heldItem.gameObject.name;
+            hintTitle.text = heldItem.name;
+            holdingText.text = heldItem.name;
             hintContent.text = "Press Right Mouse Button to drop item";
             if (heldItem.TryGetComponent<Rigidbody>(out var rb)) //if the item has a rigidbody
             {
@@ -193,6 +201,8 @@ public class PlayerInteraction : MonoBehaviour
             heldItems--; //decrement held items
             heldItem = null;
             closestItem = null;
+
+            holdingText.text = "";
         }
     }
 }
