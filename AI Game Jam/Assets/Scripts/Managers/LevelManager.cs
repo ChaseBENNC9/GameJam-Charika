@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Rendering.Universal.Internal;
 
 public class LevelManager : MonoBehaviour
 {
@@ -63,14 +64,18 @@ public class LevelManager : MonoBehaviour
     public void Respawn() //respawns the player at the active checkpoint
     {
         GameObject player = GameObject.Find("Player"); //finds the player object and destroys it
-        Destroy(player);
+        PlayerInteraction playerInteraction = player.GetComponent<PlayerInteraction>();
         GameObject respawnPlayer = GameObject.Instantiate(
-            playerprefab,
+            player,
             new Vector3(activeCheckpoint.location.x, PLAYERY, activeCheckpoint.location.z),
             Quaternion.identity //respawns the player at the active checkpoint
         );
         respawnPlayer.name = "Player"; //sets the name and tag of the player object to "Player"
         respawnPlayer.tag = "Player";
-        FindAnyObjectByType<CameraFollow>().Player = respawnPlayer; //finds the camera follow script and sets the player to the respawned player
+        respawnPlayer.GetComponent<PlayerInteraction>().heldItems = playerInteraction.heldItems;
+        respawnPlayer.GetComponent<PlayerInteraction>().heldItem = playerInteraction.heldItem;
+        FindAnyObjectByType<ImprovedCameraFollow>().Player = respawnPlayer; //finds the camera follow script and sets the player to the respawned player
+        Camera.main.transform.position = new Vector3(transform.position.x, 10, transform.position.z); //moves the camera to the respawned player
+        Destroy(player);
     }
 }

@@ -12,8 +12,8 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public bool isActive; //is the checkpoint the currently active checkpoint
-    public Vector3 location; //the location of the checkpoint
+    [HideInInspector] public bool isActive; //is the checkpoint the currently active checkpoint
+    [HideInInspector] public Vector3 location; //the location of the checkpoint
 
 
     void Awake()

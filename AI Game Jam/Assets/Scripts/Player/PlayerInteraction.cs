@@ -24,7 +24,7 @@ public class PlayerInteraction : MonoBehaviour
     private bool inRange;
     private bool inRangeGoal;
     private GameObject closestItem;
-    [HideInInspector] public GameObject heldItem;
+    public GameObject heldItem;
     [HideInInspector] public GameObject itemGoal;
 
     private CharacterController controller; //Character controller component
@@ -45,6 +45,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag(ITEM_TAG) && other.gameObject != heldItem)
         {
             inRange = true;
@@ -80,6 +81,10 @@ public class PlayerInteraction : MonoBehaviour
             }
 
 
+        }
+        else if (other.CompareTag("Water"))
+        {
+            LevelManager.instance.Respawn();
         }
     }
 
@@ -210,4 +215,7 @@ public class PlayerInteraction : MonoBehaviour
             LevelManager.instance.holdingText.text = "";
         }
     }
+
+
+
 }

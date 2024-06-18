@@ -19041,6 +19041,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerprefab: {fileID: 4446303500982310001, guid: 5cd801b1d1481754e94e8ca09c794944, type: 3}
+  hintTitle: {fileID: 0}
+  hintContent: {fileID: 0}
+  holdingText: {fileID: 0}
 --- !u!4 &1406863146
 Transform:
   m_ObjectHideFlags: 0
@@ -22517,6 +22520,7 @@ GameObject:
   - component: {fileID: 1602638683}
   - component: {fileID: 1602638682}
   - component: {fileID: 1602638685}
+  - component: {fileID: 1602638686}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -22605,9 +22609,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602638681}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7aea65f033415147b1c37ef89cd1416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1967819456}
+--- !u!114 &1602638686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602638681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582324e347c64744eb09e805f0043815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1967819456}
