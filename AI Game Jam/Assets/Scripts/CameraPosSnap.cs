@@ -124,6 +124,8 @@ public class CameraPosSnap : MonoBehaviour
     {
         cam.transform.position = new Vector3(transform.position.x, OUTDOORS_Y, OUTDOORS_Z);
         cam.GetComponent<ImprovedCameraFollow>().yValue = OUTDOORS_Y;
+        cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = true;
+        cam.GetComponent<ImprovedCameraFollow>().zValue = OUTDOORS_Z;
         Debug.Log("Player has left the house");
         Debug.Log("Camera position: " + cam.transform.position);
     }

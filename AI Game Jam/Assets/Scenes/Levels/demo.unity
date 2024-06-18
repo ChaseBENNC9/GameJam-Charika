@@ -38839,7 +38839,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -69381,7 +69381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1558249285
 Transform:
   m_ObjectHideFlags: 0
@@ -69392,7 +69392,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 72.47, y: -8.23, z: 9.959999}
-  m_LocalScale: {x: 30, y: 8, z: 22}
+  m_LocalScale: {x: 30, y: 5.39, z: 22}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 833001584}
