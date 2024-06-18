@@ -14,9 +14,11 @@ public class ImprovedCameraFollow : MonoBehaviour
 
     public GameObject Player { get => player; set => player = value; }
 
-    public float yValue;
-    public float xValue;
-    public float zValue;
+    public int maxZvalue = -30;
+    [HideInInspector] public float yValue;
+    
+    [HideInInspector] public float xValue;
+    [HideInInspector] public float zValue;
 
 
     public bool allowCameraMovement = true;
@@ -34,10 +36,10 @@ public class ImprovedCameraFollow : MonoBehaviour
     {
         if(allowCameraMovement)
         {
-            if(Player.transform.position.z > -38)
+            if(Player.transform.position.z > maxZvalue)
                 transform.position = new Vector3(Player.transform.position.x + offset.x, yValue, Player.transform.position.z + offset.z); //sets the camera to follow the player
             else
-                transform.position = new Vector3(Player.transform.position.x + offset.x, yValue, -58); //sets the camera to follow the player
+                transform.position = new Vector3(Player.transform.position.x + offset.x, yValue, -56); //sets the camera to follow the player
         }
         else
         {
