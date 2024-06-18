@@ -18,7 +18,7 @@ public class CameraPosSnap : MonoBehaviour
     private const float FLOOR_Z = -24.24f;
     private const float SECOND_FLOOR_Y = 17.47f;
     private const float BEDROOM_Z = 2.85f;
-    private const float CELLAR_Z = -10f;
+    private const float CELLAR_Z = -44f;
     private const float CELLAR_Y = -0.6f;
 
     private const float OUTDOORS_Y = 6.7f;
@@ -57,7 +57,7 @@ public class CameraPosSnap : MonoBehaviour
             cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = false;
             cam.GetComponent<ImprovedCameraFollow>().yValue = -2.52f;
             cam.GetComponent<ImprovedCameraFollow>().xValue = 74.49f;
-            cam.GetComponent<ImprovedCameraFollow>().zValue = -10f;
+            cam.GetComponent<ImprovedCameraFollow>().zValue = CELLAR_Z;
         }      
     }
 
