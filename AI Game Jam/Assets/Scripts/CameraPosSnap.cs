@@ -24,6 +24,10 @@ public class CameraPosSnap : MonoBehaviour
     private const float OUTDOORS_Y = 6.7f;
     private const float OUTDOORS_Z = -21.1f;
 
+    private const float PROLOGUE_PUZZLE_Y = 9.76f;
+    private const float PROLOGUE_PUZZLE_Z = 16.6f;
+    private const float PROLOGUE_PUZZLE_X = -23.66f;
+
     public void OnTriggerEnter(Collider other)
     {
         // Changes camera position when player enters or exits the house
@@ -59,6 +63,16 @@ public class CameraPosSnap : MonoBehaviour
             cam.GetComponent<ImprovedCameraFollow>().xValue = 74.49f;
             cam.GetComponent<ImprovedCameraFollow>().zValue = CELLAR_Z;
         }      
+
+        if (other.gameObject.name == "PuzzleTrigger")
+        {
+            cam.transform.position = new Vector3(PROLOGUE_PUZZLE_X, PROLOGUE_PUZZLE_Y, PROLOGUE_PUZZLE_Z);
+            cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = false;
+            cam.GetComponent<ImprovedCameraFollow>().yValue = PROLOGUE_PUZZLE_Y;
+            cam.GetComponent<ImprovedCameraFollow>().xValue = PROLOGUE_PUZZLE_X;
+            cam.GetComponent<ImprovedCameraFollow>().zValue = PROLOGUE_PUZZLE_Z;
+            cam.transform.rotation = Quaternion.Euler(0, 45, 0);
+        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -88,6 +102,11 @@ public class CameraPosSnap : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.name == "PuzzleTrigger")
+        {
+            cam.transform.rotation = Quaternion.Euler(0, 0, 0);
+            cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = true;
+        }
         if (other.gameObject.tag == "FirstFloor")
         {
             LeaveHouse();
