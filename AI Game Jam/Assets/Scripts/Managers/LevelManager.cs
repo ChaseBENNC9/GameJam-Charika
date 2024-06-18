@@ -74,8 +74,9 @@ public class LevelManager : MonoBehaviour
         respawnPlayer.tag = "Player";
         respawnPlayer.GetComponent<PlayerInteraction>().heldItems = playerInteraction.heldItems;
         respawnPlayer.GetComponent<PlayerInteraction>().heldItem = playerInteraction.heldItem;
+        respawnPlayer.GetComponent<CameraPosSnap>().cam = player.GetComponent<CameraPosSnap>().cam;
         FindAnyObjectByType<ImprovedCameraFollow>().Player = respawnPlayer; //finds the camera follow script and sets the player to the respawned player
-        Camera.main.transform.position = new Vector3(transform.position.x, 10, transform.position.z); //moves the camera to the respawned player
-        Destroy(player);
+        respawnPlayer.GetComponent<CameraPosSnap>().LeaveHouse();
+        Destroy(player); //destroys the old player object
     }
 }

@@ -173,6 +173,7 @@ public class PlayerInteraction : MonoBehaviour
 
             LevelManager.instance.hintTitle.text = "";
             LevelManager.instance.hintContent.text = "";
+            LevelManager.instance.holdingText.text = "";
             heldItem.transform.rotation = Quaternion.Euler(0, 0, 0); //reset the rotation of the item
             heldItem.transform.rotation = itemGoal.transform.rotation; //rotate the item to the rotation of the goal
             heldItem.transform.localScale = heldItem.GetComponent<Item>().PlacedScale; //change the scale of the item

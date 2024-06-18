@@ -14,18 +14,35 @@ public class ImprovedCameraFollow : MonoBehaviour
 
     public GameObject Player { get => player; set => player = value; }
 
+    public float yValue;
+    public float xValue;
+    public float zValue;
+
+
+    public bool allowCameraMovement = true;
 
     void Start()
     {
+        yValue = transform.position.y;
+        xValue = transform.position.x;
+        zValue = transform.position.z;
         offset = new Vector3(0,10f,-20f); //The Camera will be 2.5 units above the player (Y) and 7 units behind the player (Z)
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if(Player.transform.position.z > -38)
-            transform.position = new Vector3(Player.transform.position.x + offset.x, transform.position.y, Player.transform.position.z + offset.z); //sets the camera to follow the player
+        if(allowCameraMovement)
+        {
+            if(Player.transform.position.z > -38)
+                transform.position = new Vector3(Player.transform.position.x + offset.x, yValue, Player.transform.position.z + offset.z); //sets the camera to follow the player
+            else
+                transform.position = new Vector3(Player.transform.position.x + offset.x, yValue, -58); //sets the camera to follow the player
+        }
         else
-            transform.position = new Vector3(Player.transform.position.x + offset.x, transform.position.y, -58); //sets the camera to follow the player
+        {
+            transform.position = new Vector3(xValue, yValue, zValue);
+        }
+        
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraPosSnap : MonoBehaviour
 {
     // GameObjects
-    [SerializeField] private GameObject cam;
+    [SerializeField] public GameObject cam;
     [SerializeField] private List<GameObject> hideObjects = new List<GameObject>(); // walls that have children with mesh renderers
     [SerializeField] private List<GameObject> exceptionWalls = new List<GameObject>(); // walls that have a mesh renderer attached
     [SerializeField] private List<GameObject> library = new List<GameObject>();
@@ -19,6 +19,8 @@ public class CameraPosSnap : MonoBehaviour
     private const float SECOND_FLOOR_Y = 17.47f;
     private const float BEDROOM_Z = 2.85f;
     private const float CELLAR_Z = -10f;
+    private const float CELLAR_Y = -0.6f;
+
     private const float OUTDOORS_Y = 6.7f;
     private const float OUTDOORS_Z = -21.1f;
 
@@ -28,29 +30,43 @@ public class CameraPosSnap : MonoBehaviour
         if (other.gameObject.tag == "FirstFloor")
         {
             cam.transform.position = new Vector3(transform.position.x, FIRST_FLOOR_Y, FLOOR_Z);
+                    cam.GetComponent<ImprovedCameraFollow>().yValue = FIRST_FLOOR_Y;
+                cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = true;
         }
         
         // Changes camera position when player is in the second floor hallway
         if (other.gameObject.tag == "SecondFloor")
         {
             cam.transform.position = new Vector3(transform.position.x, SECOND_FLOOR_Y, FLOOR_Z);
+            cam.GetComponent<ImprovedCameraFollow>().yValue = SECOND_FLOOR_Y;
         }
 
         if (other.gameObject.name == "Camera Bedroom")
         {
             cam.transform.position = new Vector3(transform.position.x, SECOND_FLOOR_Y, BEDROOM_Z);
+            cam.GetComponent<ImprovedCameraFollow>().yValue = SECOND_FLOOR_Y;
             for (int i = 0; i < library.Count; i++)
             {
                 library[i].SetActive(false);
             }
-        }        
+        }  
+
+        if (other.gameObject.name == "Cellar Stairs")
+        {
+            cam.transform.position = new Vector3(transform.position.x, -2.52f, CELLAR_Z);
+            cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = false;
+            cam.GetComponent<ImprovedCameraFollow>().yValue = -2.52f;
+            cam.GetComponent<ImprovedCameraFollow>().xValue = 74.49f;
+            cam.GetComponent<ImprovedCameraFollow>().zValue = -10f;
+        }      
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.name == "Camera Stairs" || other.gameObject.name == "Cellar Stairs")
+        if (other.gameObject.name == "Camera Stairs")
         {
             cam.transform.position = new Vector3(transform.position.x, this.transform.position.y, CELLAR_Z);
+            cam.GetComponent<ImprovedCameraFollow>().yValue = this.transform.position.y;
         }
 
         // Hides walls when player is in the second floor hallway
@@ -74,7 +90,7 @@ public class CameraPosSnap : MonoBehaviour
     {
         if (other.gameObject.tag == "FirstFloor")
         {
-            cam.transform.position = new Vector3(transform.position.x, OUTDOORS_Y, OUTDOORS_Z);
+            LeaveHouse();
         }
 
         if (other.gameObject.tag == "SecondFloor")
@@ -101,5 +117,14 @@ public class CameraPosSnap : MonoBehaviour
                 library[i].SetActive(true);
             }
         }
+    }
+
+
+    public void LeaveHouse()
+    {
+        cam.transform.position = new Vector3(transform.position.x, OUTDOORS_Y, OUTDOORS_Z);
+        cam.GetComponent<ImprovedCameraFollow>().yValue = OUTDOORS_Y;
+        Debug.Log("Player has left the house");
+        Debug.Log("Camera position: " + cam.transform.position);
     }
 }
