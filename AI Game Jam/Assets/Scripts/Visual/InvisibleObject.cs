@@ -1,6 +1,12 @@
 
 using UnityEngine;
 
+/*
+Description: Hide objects when they are too close to the camera
+Author: Erika Stuart
+
+*/
+
 public class InvisibleObject : MonoBehaviour
 {
     private float distance;

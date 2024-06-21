@@ -1,3 +1,11 @@
+
+/*
+Description: Snaps the camera to a specific position when the player enters a trigger
+Author: Erika Stuart
+
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

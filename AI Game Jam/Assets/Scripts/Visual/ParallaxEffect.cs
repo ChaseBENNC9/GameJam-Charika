@@ -1,5 +1,10 @@
 
 using UnityEngine;
+/*
+Description: Moves the background layers at a different speed to the camera to create a parallax effect
+Author: Erika Stuart
+
+*/
 
 public class ParallaxEffect : MonoBehaviour
 {

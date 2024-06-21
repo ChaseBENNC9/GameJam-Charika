@@ -1,4 +1,8 @@
 using UnityEngine;
+/*
+Description: Global settings for the game manages the level in player prefs
+Author: Chase Bennett-Hill
+*/
 
 public static class GameSettings
 {

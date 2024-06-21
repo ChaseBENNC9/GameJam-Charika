@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Description: Allows the grass to always face the camera
+Author: Erika Stuart
+*/
+
 public class BillBoard : MonoBehaviour
 {
     private GameObject cam;

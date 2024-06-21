@@ -4,6 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* Description: Used to display a modal on the screen which can be accepted or declined
+* Author: Chase Bennett-Hill
+*
+*/
+
 public class Modal : MonoBehaviour
 {
     public Text title; //Setup of the components of the modal
