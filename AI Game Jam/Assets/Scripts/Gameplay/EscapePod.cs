@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+/*
+Description: Allows the player to escape the level when they reach the escape pod
+Author: Chase Bennett-Hill
+*/
 
 public class EscapePod : MonoBehaviour
 {

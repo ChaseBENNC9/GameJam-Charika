@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/*
+Description: Main menu functionality as well as options and level select
+Author: Chase Bennett-Hill
+
+*/
 
 public class MenuManager : MonoBehaviour
 {

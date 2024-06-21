@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/*
+Description: Player can pause the game ,unpause and exit to the main menu
+Author: Chase Bennett-Hill
+*/
 
 public class PauseGame : MonoBehaviour
 {
