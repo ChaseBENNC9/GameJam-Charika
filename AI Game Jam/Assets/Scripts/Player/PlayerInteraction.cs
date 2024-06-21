@@ -45,6 +45,25 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("checkpoint"))
+        {
+            if(other.gameObject.name == "LevelStart")
+            {
+                LevelManager.instance.hintTitle.text = "Escape";
+                LevelManager.instance.hintContent.text = "Find the escape pod";
+            }
+            else if (other.gameObject.name == "Security")
+            {
+                LevelManager.instance.hintTitle.text = "Warning";
+                LevelManager.instance.hintContent.text = "Avoid the Security Lights searching for you"; 
+            }
+        }
+
+        if(other.gameObject.name == "Exit Level 1")
+        {
+            //Show some kind of message to the player
+
+        }
 
         if (other.CompareTag(ITEM_TAG) && other.gameObject != heldItem)
         {

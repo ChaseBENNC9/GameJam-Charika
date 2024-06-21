@@ -18,6 +18,8 @@ public class EscapePod : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             inRange = true;
+            LevelManager.instance.hintTitle.text = "Escape Pod";
+            LevelManager.instance.hintContent.text = "Press E to escape";
         }
     }
     void OnTriggerExit(Collider other)
@@ -25,6 +27,8 @@ public class EscapePod : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             inRange = false;
+            LevelManager.instance.hintTitle.text = "";
+            LevelManager.instance.hintContent.text = "";
         }
     }
     void Update()
