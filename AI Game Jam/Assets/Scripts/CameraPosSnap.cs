@@ -65,6 +65,8 @@ public class CameraPosSnap : MonoBehaviour
 
         if (other.gameObject.name == "Cellar Stairs")
         {
+            LevelManager.instance.hintTitle.text = "Warning";
+            LevelManager.instance.hintContent.text = "Water is dangerous for robots!";
             cam.transform.position = new Vector3(transform.position.x, -2.52f, CELLAR_Z);
             cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = false;
             cam.GetComponent<ImprovedCameraFollow>().yValue = -2.52f;

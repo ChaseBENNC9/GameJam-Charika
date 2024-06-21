@@ -8,6 +8,7 @@
 
 using System;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -45,22 +46,27 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("checkpoint"))
+        if (other.CompareTag("checkpoint"))
         {
-            if(other.gameObject.name == "LevelStart")
+            if (other.gameObject.name == "LevelStart")
             {
-                LevelManager.instance.hintTitle.text = "Escape";
-                LevelManager.instance.hintContent.text = "Find the escape pod";
+                if (GameSettings.Level == -1)
+                {
+                    LevelManager.instance.hintTitle.text = "Escape";
+                    LevelManager.instance.hintContent.text = "Find the escape pod";
+                }
+  
             }
             else if (other.gameObject.name == "Security")
             {
                 LevelManager.instance.hintTitle.text = "Warning";
-                LevelManager.instance.hintContent.text = "Avoid the Security Lights searching for you"; 
+                LevelManager.instance.hintContent.text = "Avoid the Security Lights searching for you";
             }
         }
 
-        if(other.gameObject.name == "Exit Level 1")
+        if (other.gameObject.name == "Exit Level 1")
         {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Title Screen");
             //Show some kind of message to the player
 
         }
@@ -176,13 +182,13 @@ public class PlayerInteraction : MonoBehaviour
                 DropObject();
             }
         }
-        
+
         else if ((heldItems == 0 || (heldItems > 0 && heldItem.name != itemGoal.GetComponent<ItemGoal>().itemName)) && inRangeGoal && itemGoal.GetComponent<ItemGoal>().IsComplex && Input.GetKeyDown(KEY_USE))
         {
             itemGoal.GetComponent<ComplexGoal>().UseObject();
 
         }
-        
+
     }
 
     private void UseObjectAtGoal()

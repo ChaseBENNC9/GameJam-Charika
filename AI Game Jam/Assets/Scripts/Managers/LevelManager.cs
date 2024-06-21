@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        hintTitle.text = "";
+        hintContent.text = "";
         instance = this;
         checkpoints = new List<Checkpoint>();
         foreach (Checkpoint checkpoint in FindObjectsOfType<Checkpoint>()) //iterates through a list of all the checkpoints in the scene
