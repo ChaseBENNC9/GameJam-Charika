@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed = 4.0f; //Player speed
     [SerializeField] private float jumpHeight = 1.0f; //Jump height
     private const float GRAVITYVALUE = -24f;
+    public Animator anim;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
+        anim.SetFloat("Speed", 0);
         if (groundedPlayer && playerVelocity.y < 0) //If the player is touching the ground and the player velocity is less than 0
         {
             playerVelocity.y = 0f; //Ensures that the player doesnt move when it is touching the ground
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move; //Changes the direction the player is facing based on the input of the player
+            anim.SetFloat("Speed", 1);
         }
         // Changes the height position of the player..
         if (Input.GetButton("Jump") && groundedPlayer) //If the player presses the jump button and is touching the ground
@@ -47,8 +50,6 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity.y += GRAVITYVALUE * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
-
-    
 
 }
 
