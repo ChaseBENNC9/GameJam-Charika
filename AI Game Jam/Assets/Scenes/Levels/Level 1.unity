@@ -95264,7 +95264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1814314723}
   maxZvalue: -38
-  snapZvalue: -56
+  snapZvalue: -64
   yValue: 0
   xValue: 0
   zValue: 0
