@@ -116,6 +116,8 @@ public class CameraPosSnap : MonoBehaviour
         {
             cam.transform.rotation = Quaternion.Euler(0, 0, 0);
             cam.GetComponent<ImprovedCameraFollow>().allowCameraMovement = true;
+            cam.GetComponent<ImprovedCameraFollow>().yValue = 5;
+            cam.GetComponent<ImprovedCameraFollow>().zValue = -24;
         }
         if (other.gameObject.tag == "FirstFloor")
         {
