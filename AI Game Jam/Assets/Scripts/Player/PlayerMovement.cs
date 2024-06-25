@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("Jump") && groundedPlayer) //If the player presses the jump button and is touching the ground
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITYVALUE);
+            anim.SetTrigger("Jump");
         }
 
         playerVelocity.y += GRAVITYVALUE * Time.deltaTime;
