@@ -17,13 +17,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed = 4.0f; //Player speed
     [SerializeField] private float jumpHeight = 1.0f; //Jump height
     private const float GRAVITYVALUE = -24f;
-    private Animator anim;
+    public Animator anim;
 
     private void Start()
     {
 
         controller = gameObject.GetComponent<CharacterController>(); //Gets the character controller component
-        anim = GetComponent<Animator>();
 
     }
 
