@@ -49,7 +49,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (other.gameObject.name == "LevelStart")
             {
-                if (GameSettings.Level == -1)
+                Debug.Log(GameSettings.Level);
+                if (GameSettings.Level == 0)
                 {
                     LevelManager.instance.hintTitle.text = "Escape";
                     LevelManager.instance.hintContent.text = "Find the escape pod";
