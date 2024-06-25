@@ -29,7 +29,7 @@ public class ImprovedCameraFollow : MonoBehaviour
         yValue = transform.position.y;
         xValue = transform.position.x;
         zValue = transform.position.z;
-        offset = new Vector3(0,10f,-20f); //The Camera will be 2.5 units above the player (Y) and 7 units behind the player (Z)
+        offset = new Vector3(0,4f,-26f); //The Camera will be 2.5 units above the player (Y) and 7 units behind the player (Z)
     }
 
     // Update is called once per frame
